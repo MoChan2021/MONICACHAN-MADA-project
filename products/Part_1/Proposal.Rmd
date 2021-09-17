@@ -1,0 +1,84 @@
+---
+title: "MADA Data Analysis Project Proposal"
+subtitle: ""
+author: Monica Chan
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: article
+output:
+  bookdown::word_document2: 
+    toc: false
+    number_sections: true
+  bookdown::html_document2: 
+    toc: false
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+
+Applying MADA learned techniques to a RT-PCR dataset to determine the effectiveness of sample enhancement strategies for environmental surface sampling of low bio-burden viruses.  
+
+
+# Data Description
+_What the data is_  
+
+Compilation of RT-PCR results for a couple of probes (N1 & N2) to detect recovered heat-inactivated SARS-CoV-2 samples that have undergone sample enhancement procedures.
+
+_How was it collected_  
+
+Surface sampling, sample processing, RT-PCR run results, and result compilation were collected and performed by myself.
+
+_How many observations_  
+
+The current set has 379 observations and 23 variables. Additional data will be added into this set as experiments are completed throughout the course.
+
+_Additional information?_  
+
+Additional variables (Environmental and introduced) will be tested for effects.
+
+# Data
+```{r}
+library(readr)
+Data<-read_csv("../../data/raw_data/2021.08.18_Spike.csv")
+
+str(Data)
+summary(Data)
+knitr::kable(Data[1:5,6:22] ,caption = 'First 5 Rows of data and a selection of variables table.')
+
+```
+## Questions to answer
+
+There are 3 major aims of this:
+
+1. Do the sample enhancement strategies work?
+2. How well do they work compared to each other?
+3. Are there any environmental variables recorded that have a positive impact on detection?
+
+Testing several sample enhancement strategies (Nanoparticles and Bait & Capture) for molecular detection of heat-inactivated SARS-CoV-2 from stainless-steel surfaces. The primary aim of this work is to determine if any of the enhancement strategies increase the concentration of RNA copies in a sample that will express itself as a lower Ct value from the Rt-PCR output. Lower Ct values equate to more copies being present in the sample meaning less time needed to confirm presence.  
+
+In the case the sample enhancements work, we would then compare how well they worked against an automated extraction method. The degree of "wellness" will be determined by how low the Ct value results are produced after a sample has going through a specific method.
+
+In addition to the comparison of enhancement strategies the effects of the tool used for sampling (macrofoam or knit-fiber), time held, and other environmental variables will be explored any significant effects, with interest in positive impacts to detection.
+
+### Proposed Analysis  
+
+1. General data wrangling and cleaning
+2. Summarize data for overview.
+3. Compare Standard Curve Data for run differences
+4. Compare Ct values between Methods, Tools, and Inputs (boxplots)
+5. Adjust for difference if there were significant changed (ln?) between Serial dilutions on each PCR run.
+6. Investigate any effects on the Ct recovery
+7. Investigate loss between spiking experiment and sampling experiments
+
+
+### Background Basics
+Outbreak surveillance is contingent on the samples recovered from the environment and then identified. The introduction of molecular methods has helped in the rapid identification of species causing outbreaks, but these methods are only as good as the sample collected and used. 
+
+To insure a good sample can be taken, culture methods are generally required to grow all things present in the sample. Culture based methods are the gold standard in identification, but require resources and time to culture and a multitude of other factors may cause targeted organisms to die off or out competed during culturing.
+
+Enter sample enhancement and a direct to molecular method workflow for quick ready to sequence samples.  
+
+Low-quality samples often are confounded by contamination or just low presence. Here I plan to utilize two types of sample enhancement strategies to see if these technologies work and how well they work against an automated sample extractor (Promega Maxwell 48). The first to be tested are Nanotrap Particles (Ceres Nanoscience), a hydrogel particle enhanced with specific affinity dyes that attract a target organism. The second strategy to be tested will be capture Baits (Arbor Sciences)- customized complementary baits for a target that can be used to select specific targets. 
+
+Though this project was created with Antimicrobial resistant organisms in mind, the 2020 pandemic halted research on non mission critical (Covid related) projects. Explaining the use of the SARS-CoV-2 virus in this study. 
+
+

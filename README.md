@@ -3,7 +3,7 @@
 This is Monica Chan's class project repository.
 
 __2021.09.16 - Part 1 -__  
-* Required assignment located in the Manuscript.rmd file and knitted to both document and html ouputs.
+* Required assignment outputs in the products folder in Part_1 as "Proposal.Rmd"" -- knitted to both document and [html](/products/Part_1/Proposal.html) outputs.
 * Current data has been uploaded in data folder as 2021.08.18_Spike.csv.
 
 2021.10.08 - Part 2 -  
