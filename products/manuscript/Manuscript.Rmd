@@ -1,7 +1,7 @@
 ---
-title: "Example Manuscript Template for a Data Analysis Project"
+title: "MADA Data Analysis Project"
 subtitle: ""
-author: Andreas Handel
+author: Monica Chan
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
@@ -19,20 +19,45 @@ The structure below is a possible setup for a data analysis project (including t
 
 
 # Summary/Abstract
-_Write a summary of your project._
-
+_Write a summary of your project._  
+Applying MADA learned techniques to a RT-PCR dataset to determine the effectiveness of sample enhancement strategies for environmental surface sampling of low bio-burden viruses.  
 
 # Introduction 
 
 ## General Background Information
 _Provide enough background on your topic that others can understand the why and how of your analysis_ 
 
+
+### Surfaces Preparation  
+Stainless-steel coupons (10x20in) were triple washed with detergent, rinsed with RO water, sprayed with 70% Ethanol and left to air dry. The dry coupons were wrapped in craft paper and autoclaved on a solid cycle.  Before use, the coupons are unwrapped while in a BSC 
+
+### Inoculum Preparation
+A serial dilution of heat-inactivated SARS-CoV-2 (~10^6 copies/uL, ATCC Strain) and Viral Transport Media (CDC protocol) was created 
+
+### Inoculation of Surfaces
+
+
 ## Description of data and data source
 _Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section._
 
-## Questions/Hypotheses to be addressed
-_State the research questions you plan to answer with this analysis._
+Data was self recorded over several experimental runs of an on going series. 
+The current set has 379 observations and 23 variables. Additional data will be added into this set as experiments are completed throughout the course.
+The data itself is a combination of observed processing variables and the resulting RT-PCR data. Copy data may eventually be included. It is currently calculated in an excel document, but may be reproduced in this project for best practice).
+A copy of the data has been placed in the data folder of this repository. 
 
+## Questions/Hypotheses to be addressed
+
+There are 3 major aims of this:
+
+1. Do the sample enhancement strategies work?
+2. How well do they work compared to each other?
+3. Are there any environmental variables recorded that have a positive impact on detection?
+
+Testing several sample enhancement strategies (Nanoparticles and Bait & Capture) for molecular detection of heat-inactivated SARS-CoV-2 from stainless-steel surfaces. The primary aim of this work is to determine if any of the enhancement strategies increase the concentration of RNA copies in a sample that will express itself as a lower Ct value from the Rt-PCR output. Lower Ct values equate to more copies being present in the sample meaning less time needed to confirm presence.  
+
+In the case the sample enhancements work, we would then compare how well they worked against an automated extraction method. The degree of "wellness" will be determined by how low the Ct value results are produced after a sample has going through a specific method.
+
+In addition to the comparison of enhancement strategies the effects of the tool used for sampling (macrofoam or knit-fiber), time held, and other environmental variables will be explored any significant effects, with interest in positive impacts to detection.
 
 
 # Methods and Results

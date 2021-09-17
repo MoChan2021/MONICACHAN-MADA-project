@@ -1,6 +1,17 @@
 # Overview
 
-A template file and folder structure for a data analysis project/paper done with R/Rmarkdown/Github. 
+This is Monica Chan's class project repository.
+
+__2021.09.16 - Part 1 -__  
+* Required assignment located in the Manuscript.rmd file and knitted to both document and html ouputs.
+* Current data has been uploaded in data folder as 2021.08.18_Spike.csv.
+
+2021.10.08 - Part 2 -  
+2021.10.29 - Part 3 -  
+2021.11.26 - Part 4 -  
+2021.12.10 - Part 5 -  
+
+***
 
 # Pre-requisites
 
