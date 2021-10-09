@@ -69,7 +69,15 @@ _In most research papers, results and methods are separate. You can combine them
 _As applicable, explain where and how you got the data. If you directly import the data from an online source, you can combine this section with the next._
 
 ## Data import and cleaning
-_Write code that reads in the file and cleans it so it's ready for analysis. Since this will be fairly long code for most datasets, it might be a good idea to have it in one or several R scripts. If that is the case, explain here briefly what kind of cleaning/processing you do, and provide more details and well documented code somewhere (e.g. as supplement in a paper). All materials, including files that contain code, should be commented well so everyone can follow along._
+
+Data comes out of different reports. This report is added to a supplemental report gathered while the samples were processed and added into one giant compilation then read into R.
+
+processingscript.R was modified to do initial cleaning and preparation of the dataset for further exploration.Data is also saved.
+
+
+
+
+
 
 
 ## Exploratory analysis
