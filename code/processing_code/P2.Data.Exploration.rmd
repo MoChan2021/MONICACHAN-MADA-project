@@ -1,0 +1,99 @@
+---
+title: "P2.Data.Exploration"
+author: "MYC"
+date: "10/25/2021"
+output: 
+  html_document:
+    theme: cosmo
+editor_options: 
+  chunk_output_type: console
+---
+Loading all the default settings and preliminary programs.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) #for data processing and all dplyr related programs
+library(here)      #to set paths
+library(tidymodels)      # for the recipes package, along with the rest of tidymodels
+library(skimr)           # for variable summaries
+
+```
+Path to Processed Data and loading of cleaned data
+```{r load data}
+data_location <- here::here("data","processed_data","P2.Processed.rds")
+data<- readRDS(data_location)
+glimpse(data)
+```
+Summary tables
+```{r All Summary}
+#making a summary table of proportions of Ct
+data%>%
+  count(Tool)%>%
+  mutate(Proportions = n/sum(n)) #sample/sum of sample
+
+data%>%
+  skim()
+```
+## The Undetected Ct Values
+Data Split out data for undetected
+```{r Undetected}
+#Create df of only samples without any Ct values
+Undetected<-data%>%
+  filter(is.na(Ct)) #filter for all NA's in Ct value-- this will mean not detected or error
+
+skim(Undetected)
+
+Undetected%>%
+  filter(!grepl("*.CTRL", Tool))%>% #!grepl= removes anything ending with .CTRL in the Tool column
+  group_by(Detector, Method, Input, Dilution)%>%
+  count(Tool)%>%
+  arrange(desc(n))%>%
+  ggplot(aes(y=n,))+
+  geom_col(position="dodge2", aes(x=Method, fill=Dilution ))+
+  facet_grid(.~Detector)+
+  labs(title="Number of Tool samples that were undetected after sampling and extradtion")
+```
+From the current dataset we see that at an input of 300 from tool B have a chance of being undetected.
+The sample with most detection errors is the automated method recovering at the -3 log of solution for both probes.
+
+## Back to the Data as a whole
+```{r}
+data%>%
+  count(Method, Tool, Dilution, Input, sort=TRUE)
+
+summary(data)
+```
+
+```{r}
+ToolSummary<-data%>%
+  select(Method, Detector, Tool, Input, Dilution, Ct)%>%
+  filter(Method!="PCR", Tool%in%c("A","B","SD"))%>% #Remove PCR controls
+  group_by(Detector, Method, Tool, Input)%>%
+  summarise(n=n())%>%
+  arrange(n,Detector)
+print(ToolSummary)
+```
+
+```{r}
+data%>%
+  filter(Tool%in%c("SD", "NEG.CTRL","POS.CTRL"))%>%
+  ggplot(aes(Dilution, Ct))+
+  geom_line()+
+  facet_wrap(~Tool)+
+  scale_y_reverse()
+```
+
+SD Histogram between NTP and CDC
+```{r}
+data%>%
+  filter(Tool%in%c("SD", "NEG.CTRL","POS.CTRL"))%>%
+  arrange(Tool%in%c("NEG.CTRL", "SD", "POS.CTRL"),
+          Input%in%c("300","1000","*"))%>%
+  ggplot(aes(Dilution, Ct))+
+  geom_jitter(aes(color=Input))+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_wrap(~Method)+
+  scale_y_reverse() #reverse the Y axis for Ct graphics, as lower Ct values indicate presence
+```
+
+

@@ -38,6 +38,7 @@ Cleaned data is found under the data in processed_data folder
 * Decide to Split the Data and make a companion UndeterminedData dataframe for additional analysis.
 
 __Making the UndeterminedData__
+
 see above but added filter() for Ct=="Undetermined" to pull all data with Undetermined as a reported value
 
 ## Data Wrangling
@@ -45,10 +46,11 @@ see above but added filter() for Ct=="Undetermined" to pull all data with Undete
 Started to play with analysisscript.
 Outputs of the data play are in results.
 
-####Run summaries
+#### Run summaries
 
 
-####Exploritory Figures
+
+#### Exploritory Figures
 
 ##### View the whole data set
 
@@ -57,7 +59,7 @@ Outputs of the data play are in results.
 ##### Breakdown comparisons with the two methods being compared-- CDC and NTP had a comparitive input of 300uL
 
 ![resultfigure2](../../results/resultfigure2.png)
-Interesting-- why is there such a group difference in Surface Sampling experiements versus Spike
+Interesting-- why is there such a group difference in Surface Sampling experiments versus Spike
 Oh makes sense it's SD- the serial dilution. We expect the SD to be like the standard curve and the recovery should have loss.
 
 
@@ -66,3 +68,30 @@ Deeper dive into looking at the Surface Sampling Experiment, as it has some diff
 ##### Breakdown comparisons more with only the Surface Sample experiment
 
 ![SS300](../../results/SS300.png)
+
+##### Local Polynomial Regression Smoothing (loess) with polynomial formula
+
+
+
+![SS300-Smooth](../../results/SS300Smooth.png)
+
+##### Density Plots -Experimental view
+
+###### Desnsity Output 
+
+Doesn't take into account for the replicates in Sample facet. SD facet seems more in line.
+![SS300-Density](../../results/SS300-Density.png)
+
+###### ECDF analysis - Look into the data this way to see if __HOW__ different these are
+
+This is an ECDF between the Phase 2 runs. This compares CDC ONLY data between the two PCR runs as we adjusted changes. Done so I can include the CDC data with little change in code.
+Appears to have little difference, likely insignifant- will need to run stats.
+![SS300-ECDF.PCR](../../results/SS300-ECDF.PCR.png)
+
+###### 
+Exploring the 
+
+![SS300-ECDF.Type](../../results/SS300-ECDF.Type.png) 
+
+
+![SS300-ECDF.Method](../../results/SS300-ECDF.Method.png)

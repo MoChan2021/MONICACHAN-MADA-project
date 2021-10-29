@@ -1,0 +1,180 @@
+---
+title: "Asks"
+author: "MYC"
+date: "10/27/2021"
+output: html_document
+---
+Loading all the default settings and preliminary programs.
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) #for data processing and all dplyr related programs
+library(here)      #to set paths
+library(tidymodels)      # for the recipes package, along with the rest of tidymodels
+library(skimr)           # for variable summaries
+
+```
+List of asks:
+
+* A vs B, 
+* CDC vs NTP
+* NTP 300 vs NTP 1000
+
+```{r}
+data%>%
+  group_by(Detector, Method, Tool, Input)%>%
+  summarize(n=n(),
+            Ct=mean(Ct))
+```
+
+Path to Processed Data and loading of cleaned data
+```{r load data}
+data_location <- here::here("data","processed_data","P2.Processed.rds")
+data<- readRDS(data_location)
+glimpse(data)
+```
+
+# A vs B
+
+Tools are used to sample different concntrations of seeded virus.
+A recovered from -1 inoculated coupon area.
+B recovered from -3 inoculated coupon area.
+```{r}
+data%>% 
+  filter(Tool%in% c("A", "B"))%>%
+  count(Method)
+
+data%>% 
+  filter(Tool%in% c("A", "B"), Input!="6400")%>%
+  ggplot(aes(x=Tool, y= Ct))+
+  geom_boxplot(aes(color=Method))+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_grid(Detector~Input)+
+  scale_y_reverse()+
+  labs(y="Ct Value",
+       x=NULL,
+       title="Comparing A and B tool recovery")
+  
+```
+Tool A has an average Ct recovery higher than B. This makes sense as the surfaces A recovered from is 2 logs higher (-1) than that of B (-3). A log drop is ~3Ct values we can see from the graphic that it trends as predicted.
+Suggests that 
+
+
+# CDC vs NTP
+
+Compare the different extraction methods Serial Dilutions
+```{r}
+data%>%
+  mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
+  filter(Tool=="SD", Input=="300")%>%
+  ggplot(aes(x=Dilution, y=Ct, color=Method))+
+  scale_y_reverse()+
+  geom_point()+
+  geom_smooth(aes(fill=Method),method=lm, alpha=0.20, fullrange=TRUE)+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+#  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_wrap(Detector~Tool)+
+  labs(title = "Serial Dilution comparisons between CDC and NTP Methods, Input at 300.")
+
+```
+Serial dilution data between CDC and NTP.
+Noting that all SD are in the confirmed realm of under 27 Ct Value
+CDC method is better than NTP at -1 concentration of the SD.
+the -2 shows little difference between method recovery Ct values.
+NTP appears to remain better than CDC at -3 and -4 levels.
+Accounting for the SE looks like both methods are the same until the -2 dilution.
+Might be significant difference at the -4 dilution.
+
+
+Compare between extraction methods at input 300
+```{r}
+data%>%
+  mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
+  filter(Input=="300")%>%
+  ggplot(aes(x=Dilution, y=Ct, color=Tool))+
+  scale_y_reverse()+
+  geom_jitter()+
+  geom_smooth(method=lm)+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_wrap(Method~Detector)+
+  labs(title="Method extraction comparisons with standard input")
+
+```
+
+
+
+Compare between extraction methods with additional inputs
+```{r}
+data%>%
+  mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
+  filter(Input!="CTRL")%>%
+  ggplot(aes(x=Dilution, y=Ct, shape=Tool, color=Input))+
+  scale_y_reverse()+
+  geom_jitter()+
+  geom_smooth(method=lm)+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_wrap(Method~Detector)+
+  labs(title="Method extraction comparisons with all inputs and tools")
+```
+
+
+# NTP Input variations
+
+Serial Dilution
+```{r}
+data%>%
+  mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
+  filter(Method=="NTP", Tool=="SD", Input!="CTRL", Input!="6800")%>%
+  ggplot(aes(x=Dilution, y=Ct, color=Input, shape=Input))+
+  scale_y_reverse()+
+  geom_jitter()+
+  geom_smooth(method=lm, se=FALSE, fullrange=TRUE)+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  facet_wrap(.~Detector)+
+  labs(title="Comparing Input levels on the Serial Dilituions with for the NTP method.")
+```
+NTP SD is similar to CDC SD in that the Ct values remain under 27, the most "confirmed" presence of nCoV-2.
+Interesting! Looks like 300 input is really the lowest and as the inputs increase they kind of converge together at the -3 dilution level. 
+Interpretation:
+better detection at high copy levels with lower input; 
+better detection at low copy levels with more input; 
+
+If we could determine how many copies are in the -3 dilution we may be able to better estimate the capacity of the particles.
+
+NTP
+```{r}
+data%>%
+  mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
+  filter(Method=="NTP", Input=="300"|Input=="1000")%>%
+  ggplot(aes(x=Dilution, y=Ct, shape=Input, color=Tool))+
+  scale_y_reverse()+
+  geom_jitter()+
+  geom_smooth(method=glm, fullrange=TRUE)+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_wrap(.~Detector)+
+  labs(title="NTP extraction comparisons with all at 300 and 1000 input levels and all tools")
+```
+
+
+NTP
+```{r}
+data%>%
+  mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
+  filter(Method=="NTP", Tool!="SD", Input>=6000, Input!="CTRL")%>%
+  ggplot(aes(x=Dilution, y=Ct, color=Input))+
+  scale_y_reverse()+
+  geom_boxplot(aes(fill=Input))+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  facet_grid(Tool~Detector)+
+  labs(title="NTP extraction comparisons Eluents input levels and all tools")
+```
+Negatives show no detection. Positive controls are at -1 and have smaller Ct value than the A tools which recovered -1 inoculations. Gold line represents the threshold of 27
+
+```{r}
+data%>%
+  filter(Input>=6000, Input!="CTRL")
+```
+

@@ -5,6 +5,7 @@
 #and saves the results to the results folder
 
 #load needed packages. make sure they are installed.
+library(dplyr) #for data processing
 library(ggplot2) #for plotting
 library(broom) #for cleaning up output from lm()
 library(here) #for data loading/saving
@@ -131,34 +132,92 @@ p3<-DirectCompare%>%
 ###look at figure
 plot(p3)
 
-###save figure
+###save figure SS300
 figure_file = here("results","SS300.png")
 ggsave(filename = figure_file, plot=p3)
 
 
 #### Let's focus only on the Surface sampling 
-DirectCompare%>%
+p4<-DirectCompare%>%
   filter(EXP=="SurfaceSampling", 
          Input=="300")%>% 
   ggplot(aes(x=Dilution.Factor, y=Ct))+
   geom_jitter()+
   geom_smooth(method="loess")+ #added smooth regression line
-  facet_grid(.~Type)
+  facet_grid(Method~Type)
+plot(p4)
+###save figure SS300Smooth
+figure_file = here("results","SS300Smooth.png")
+ggsave(filename = figure_file, plot=p4)
 
              
-
 #### Try Density plots
-mydata%>%
+DraftP5<-mydata%>%
   filter(EXP=="SurfaceSampling", 
          Input=="300")%>% 
   ggplot(aes(x=Ct, color=Method))+
   geom_density()+
   facet_grid(.~Type)
+plot(DraftP5)
+
+###save figure
+figure_file = here("results","SS300-Density.png")
+ggsave(filename = figure_file, plot=DraftP5)
+
 
 #### Try stat_ecdf()
-mydata%>%
+###Empirical Distribution Function
+### Concerned with observations rather than theory. Use data to create cumulative distribution
+### The more "separate" the lines are the more different they are from each other 
+DraftP6<-mydata%>%
   filter(EXP=="SurfaceSampling", 
-         Input=="300")%>% 
+         Input=="300",
+         Dilution.Factor!="NA")%>% 
   ggplot(aes(x=Ct, color=Method))+
   stat_ecdf()+
   facet_grid(Dilution.Factor~Type)
+
+###save figure
+figure_file = here("results","SS300-ECDF.Method.png")
+ggsave(filename = figure_file, plot=DraftP6)
+
+## no obvious difference between the methods within sample type
+
+DraftP7<-mydata%>%
+  filter(EXP=="SurfaceSampling", 
+         Input=="300",
+         Dilution.Factor!="NA")%>% 
+  ggplot(aes(x=Ct, color=Type))+
+  stat_ecdf()+
+  facet_grid(Dilution.Factor~Method)
+###save figure
+figure_file = here("results","SS300-ECDF.Type.png")
+ggsave(filename = figure_file, plot=DraftP7)
+
+#significantly different between samples and type <- confirms difference in sensitivity. Interesting not as much in -1
+
+##Let's see the relation between the runs, specifically the CDC since we adjusted the Lysis buffer
+DraftP8<-mydata%>%
+  filter(EXP=="SurfaceSampling", #Only one set of experiments
+         Input=="300", #only 300 input
+         Method=="CDC", #only CDC method
+         Dilution.Factor!="NA")%>%  #Removes NA in Dilution.Factor
+  ggplot(aes(x=Ct, color=PCR))+ #Color PCR as there's a difference in method adjustment
+  stat_ecdf()+
+  facet_grid(Dilution.Factor~Type)
+
+###save figure
+figure_file = here("results","SS300-ECDF.PCR.png")
+ggsave(filename = figure_file, plot=DraftP8)
+
+##Appears that there are some differences once it hits -2 dilution factor in SD
+##? Less different as dilution decreases.
+##Samples 
+# Thoughts: 
+
+
+
+
+
+## RELATED: Q-Q plot
+

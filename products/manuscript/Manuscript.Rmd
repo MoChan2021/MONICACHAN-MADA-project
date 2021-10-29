@@ -15,37 +15,16 @@ bibliography: ../references.bib
 csl: ../apa.csl
 ---
 
-The structure below is a possible setup for a data analysis project (including the course project). For a manuscript, adjust as needed.
-
-
 # Summary/Abstract
 _Write a summary of your project._  
 Applying MADA learned techniques to a RT-PCR dataset to determine the effectiveness of sample enhancement strategies for environmental surface sampling of low bio-burden viruses.  
 
 # Introduction 
 
-## General Background Information
-_Provide enough background on your topic that others can understand the why and how of your analysis_ 
+##  Background
+The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens. Although many viruses have a low infectious dose, they can be difficult to detect due to the low bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices.
 
-
-### Surfaces Preparation  
-Stainless-steel coupons (10x20in) were triple washed with detergent, rinsed with RO water, sprayed with 70% Ethanol and left to air dry. The dry coupons were wrapped in craft paper and autoclaved on a solid cycle.  Before use, the coupons are unwrapped while in a BSC 
-
-### Inoculum Preparation
-A serial dilution of heat-inactivated SARS-CoV-2 (~10^6 copies/uL, ATCC Strain) and Viral Transport Media (CDC protocol) was created 
-
-### Inoculation of Surfaces
-
-
-## Description of data and data source
-_Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section._
-
-Data was self recorded over several experimental runs of an on going series. 
-The current set has 379 observations and 23 variables. Additional data will be added into this set as experiments are completed throughout the course.
-The data itself is a combination of observed processing variables and the resulting RT-PCR data. Copy data may eventually be included. It is currently calculated in an excel document, but may be reproduced in this project for best practice).
-A copy of the data has been placed in the data folder of this repository. 
-
-## Questions/Hypotheses to be addressed
+### Questions/Hypotheses to be addressed
 
 There are 3 major aims of this:
 
@@ -60,17 +39,16 @@ In the case the sample enhancements work, we would then compare how well they wo
 In addition to the comparison of enhancement strategies the effects of the tool used for sampling (macrofoam or knit-fiber), time held, and other environmental variables will be explored any significant effects, with interest in positive impacts to detection.
 
 
-# Methods and Results
+## Methods and Results
 
-_In most research papers, results and methods are separate. You can combine them here if you find it easier. You are also welcome to structure things such that those are separate sections._
+Using established standard methods for environmental sampling with a self-contained polyurethane swab, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR
 
 
 ## Data aquisition
-_As applicable, explain where and how you got the data. If you directly import the data from an online source, you can combine this section with the next._
+Reports per each rRT-PCR run were generated and quality checked on their respective machines before transfer to a Teams repository. Summary data was selected from the reports and added to additional environmental data gathered on based on the extraction date of the sample.
+Completed run data is then collated into one file and red into R.
 
-## Data import and cleaning
-
-Data comes out of different reports. This report is added to a supplemental report gathered while the samples were processed and added into one giant compilation then read into R.
+### Data import and cleaning
 
 processingscript.R was modified to do initial cleaning and preparation of the dataset for further exploration.Data is also saved.
 
