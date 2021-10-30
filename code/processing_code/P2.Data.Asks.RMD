@@ -22,8 +22,10 @@ List of asks:
 ```{r}
 data%>%
   group_by(Detector, Method, Tool, Input)%>%
+  filter(Method!="PCR")%>%
   summarize(n=n(),
-            Ct=mean(Ct))
+            Ct=mean(Ct))%>%
+  mutate(tools=(n/2))
 ```
 
 Path to Processed Data and loading of cleaned data

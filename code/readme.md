@@ -1,10 +1,8 @@
-Place your various R or Rmd scripts in the appropriate folders.
+Rmd scripts are placed in respective folders.
 
-You can either have fewer large scripts, or multiple scripts that do only specific actions. Those can be R scripts or Rmd files. In either case, document the scripts and what goes on in them so well that someone else (including future you) can easily figure out what is happening.
+Processing_code pertains to the reading and preparation of the Raw data into rds files that are output into the data/processed_data folder.
 
-The scripts should load the appropriate data (e.g. raw or processed), perform actions, and save results (e.g. processed data, figures, computed values) in the appropriate folders. Document somewhere what inputs each script takes and where output is placed. 
+analysis_code pertains to the use and analysis of the rds files for analysis.
+Outputs from these files are saved into the results folder in this project.
 
-If scripts need to be run in a specific order, document this. Either as comments in the script, or in a separate text file such as this. Ideally of course in both locations.
-
-
-Depending on your specific project, you might want to have further sub-folders.
+Once finalize the code and their products will be featured in the Products folder of this project.

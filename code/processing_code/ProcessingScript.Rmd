@@ -1,0 +1,105 @@
+---
+title: "Data Processing and Saving"
+author: "MYC"
+date: "10/29/2021"
+output: 
+  html_document:
+    theme: cosmo
+editor_options: 
+  chunk_output_type:
+---
+Loading all the default settings and preliminary programs.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) #for data processing and all dplyr related programs
+library(here)      #to set paths
+library(lubridate) # for date manipulation
+library(broom)    #for tidying up if needed
+
+```
+####
+__Eventually this will read in the combined dataframe made from separate reports__
+
+For now, this will import a self-maintained csv file to do initial analysis.
+
+###
+
+## Loading File
+```{r Load All Data}
+data_location <- here::here("data","raw_data","2021-10-23_All.Update.csv")
+rawdata <- read.csv(data_location)
+```
+## Clean Data
+
+### View Data
+```{r view data}
+dplyr::glimpse(rawdata)
+
+head(rawdata)
+tail(rawdata)
+summary(rawdata)
+```
+## Wrangle Data
+```{r wrangle data}
+All.PCR<-rawdata%>%
+  #select data cols that will be relevant for analysis
+  select(Phase:Ct)%>%
+  #change some of the data types into other data types
+  mutate(Phase=as.factor(Phase), 
+         Plate=as.factor(Plate),
+         Method=as.factor(Method),
+         Tool=as.factor(Tool),
+         Input=as.numeric(Input),
+         Dilution=as.numeric(Dilution),
+         Detector=as.factor(Detector),
+         Ct=as.numeric(Ct))%>%
+  glimpse()
+#leaving Ct as Character, for not
+summary(All.PCR)
+```
+## Split Data and Save
+
+### Phase 1 select Data (P1)
+```{r P1 Select}
+Phase1Data<-All.PCR%>%
+  filter(Phase=="1")
+
+summary(Phase1Data)
+```
+```{r P1 Save RDS}
+save_data_location <- here::here("data","processed_data","P1-20211029.rds")
+
+saveRDS(Phase1Data, file = save_data_location)
+```
+
+### Phase 2 select Data (P2)
+```{r P2 Select}
+Phase2Data<-All.PCR%>%
+  filter(Phase=="2")
+
+summary(Phase2Data)
+
+```
+```{r P2 Save RDS}
+
+save_data_location <- here::here("data","processed_data","P2-20211029.rds")
+
+saveRDS(Phase2Data, file = save_data_location)
+```
+
+
+
+
+
+
+
+
+
+
+
+Confirm Path to Processed Data and loading of cleaned data
+```{r load data}
+data_location <- here::here("data","processed_data",".rds")
+data<- readRDS(data_location)
+glimpse(data)
+```

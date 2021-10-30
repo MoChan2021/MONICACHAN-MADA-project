@@ -1,0 +1,30 @@
+---
+title: "Cleaning_Reports"
+author: "MYC"
+date: "10/29/2021"
+output: html_document
+---
+Trying to determine the best way to read in excel reports for more automated data building.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(lubridate)
+library(broom)
+```
+## Read in Reports 
+Reports are generated in .csv outputs.
+Would like to be able to read in each individual file from data\raw_data\Reports
+```{r Read Reports}
+
+```
+
+## Scrape Data from reports
+From read in data frames need to pull out a selection of data from A21:F12 (includes headers)
+
+```{r Scraping Data}
+
+```
+
+
