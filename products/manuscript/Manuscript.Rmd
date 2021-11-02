@@ -26,11 +26,12 @@ The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due
 
 ### Questions/Hypotheses to be addressed
 
-There are 3 major aims of this:
+There are several major aims of this:
 
 1. Do the sample enhancement strategies work?
 2. How well do they work compared to each other?
 3. Are there any environmental variables recorded that have a positive impact on detection?
+4. Can this data be modeled to back calculate a sample's original concentration based on the Ct values recovered?
 
 Testing several sample enhancement strategies (Nanoparticles and Bait & Capture) for molecular detection of heat-inactivated SARS-CoV-2 from stainless-steel surfaces. The primary aim of this work is to determine if any of the enhancement strategies increase the concentration of RNA copies in a sample that will express itself as a lower Ct value from the Rt-PCR output. Lower Ct values equate to more copies being present in the sample meaning less time needed to confirm presence.  
 
@@ -41,18 +42,59 @@ In addition to the comparison of enhancement strategies the effects of the tool 
 
 ## Methods and Results
 
-Using established standard methods for environmental sampling with a self-contained polyurethane swab, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR
+### Experiment setup and conditions
+
+Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR
 
 
 ## Data aquisition
 Reports per each rRT-PCR run were generated and quality checked on their respective machines before transfer to a Teams repository. Summary data was selected from the reports and added to additional environmental data gathered on based on the extraction date of the sample.
-Completed run data is then collated into one file and red into R.
+
+Completed run data is then collated into one file and read into R./A composited data set was compiled and saved as a csv and used as the base data for the project
 
 ### Data import and cleaning
 
-processingscript.R was modified to do initial cleaning and preparation of the dataset for further exploration.Data is also saved.
+processingscript.R was modified to do initial cleaning and preparation of the dataset for further exploration.
+
+Data was imported and cleaned.
+Data was then split between the two different experimental types (P1 and P2).
+
+This can be found in processing_code/ProcessingScript.RMD
+
+### Data exploration
+
+_Use a combination of text/tables/figures to explore and describe your data. You should produce plots or tables or other summary quantities for the most interesting/important quantities in your data. Depending on the total number of variables in your dataset, explore all or some of the others. 
+
+_Continue by creating plots or tables of the outcome(s) of interest and the predictor/exposure/input variables you are most interested in. If your dataset is small, you can do that for all variables. Plots produced here can be scatterplots, boxplots, violinplots, etc. Tables can be simple 2x2 tables or larger ones._
+
+_To get some further insight into your data, if reasonable you could compute simple statistics (e.g. t-tests, simple regression model with 1 predictor, etc.) to look for associations between your outcome(s) and each individual predictor variable. Though note that unless you pre-specified the outcome and main exposure, any "p<0.05 means statistical significance" interpretation is not valid._
+
+#### All Data
+
+Overview - split between part 1 and part 2
 
 
+```{r ALLsummarytable,  echo=FALSE}
+resulttable=readRDS("../../results/ALLsummarytable.rds")
+knitr::kable(ALLresulttable, caption = 'ALL Data summary table.')
+```
+
+##### Serial Dilutions confirmation
+
+Summary table 
+scatter plot of SDs based ond dilution factors
+
+#### Phase 1
+
+
+
+### Phase 2
+
+
+
+### Data Analysis
+
+### Data Modeling
 
 
 
@@ -60,11 +102,7 @@ processingscript.R was modified to do initial cleaning and preparation of the da
 
 ## Exploratory analysis
 
-_Use a combination of text/tables/figures to explore and describe your data. You should produce plots or tables or other summary quantities for the most interesting/important quantities in your data. Depending on the total number of variables in your dataset, explore all or some of the others. FIgures produced here might be histograms or density plots, correlation plots, etc. Tables might summarize your data._
 
-_Continue by creating plots or tables of the outcome(s) of interest and the predictor/exposure/input variables you are most interested in. If your dataset is small, you can do that for all variables. Plots produced here can be scatterplots, boxplots, violinplots, etc. Tables can be simple 2x2 tables or larger ones._
-
-_To get some further insight into your data, if reasonable you could compute simple statistics (e.g. t-tests, simple regression model with 1 predictor, etc.) to look for associations between your outcome(s) and each individual predictor variable. Though note that unless you pre-specified the outcome and main exposure, any "p<0.05 means statistical significance" interpretation is not valid._
 
 Table \@ref(tab:summarytable) shows a table summarizing the data.
 

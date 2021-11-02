@@ -1,0 +1,97 @@
+---
+title: "Part 3"
+subtitle: ""
+author: Monica Chan
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: article
+output:
+  bookdown::html_document2: 
+    toc: false
+  bookdown::word_document2: 
+    toc: false
+    number_sections: true
+bibliography: ../references.bib
+csl: ../apa.csl
+---
+# Data Exploration
+Complete the data loading/cleaning/wrangling part, as well as having a mostly complete data exploration part.  
+
+
+## Data Loading  
+_What the data is_  
+
+Compilation of RT-PCR results for a couple of probes (N1 & N2) to detect recovered heat-inactivated SARS-CoV-2 samples that have undergone sample enhancement procedures.
+These data can be found in the data folder under raw_data
+
+## Data Cleaning
+Cleaned data is found under the data in processed_data folder
+
+1. Compiled reports into a single csv.
+2. Import the reports into R.
+3. Check summary, head, and tail of data 
+4. Select relevant parts of the data to form new data frame
+5. Mutate classes of data for easier manipulation.
+6. Renamed a value as it is the only value left. The Raw data had sevearl versions of it as the series of columns displayed a train of thought display of calculation.
+
+* noted that there were additional NAs that would be generated when mutating Ct values into numeric. Which should be fine, but with how the reports are generated some levels recorded are noted as Undetermined or not reliably detected.
+* Decide to Split the Data and make a companion UndeterminedData dataframe for additional analysis.
+
+__Making the UndeterminedData__
+
+see above but added filter() for Ct=="Undetermined" to pull all data with Undetermined as a reported value
+
+## Data Wrangling
+
+Started to play with analysisscript.
+Outputs of the data play are in results.
+
+#### Run summaries
+
+
+
+#### Exploritory Figures
+
+##### View the whole data set
+
+![resultfigure](../../results/resultfigure.png)
+
+##### Breakdown comparisons with the two methods being compared-- CDC and NTP had a comparitive input of 300uL
+
+![resultfigure2](../../results/resultfigure2.png)
+Interesting-- why is there such a group difference in Surface Sampling experiments versus Spike
+Oh makes sense it's SD- the serial dilution. We expect the SD to be like the standard curve and the recovery should have loss.
+
+
+Deeper dive into looking at the Surface Sampling Experiment, as it has some differences and is new-er data. Also includes data with Temp & RH:
+
+##### Breakdown comparisons more with only the Surface Sample experiment
+
+![SS300](../../results/SS300.png)
+
+##### Local Polynomial Regression Smoothing (loess) with polynomial formula
+
+
+
+![SS300-Smooth](../../results/SS300Smooth.png)
+
+##### Density Plots -Experimental view
+
+###### Desnsity Output 
+
+Doesn't take into account for the replicates in Sample facet. SD facet seems more in line.
+![SS300-Density](../../results/SS300-Density.png)
+
+###### ECDF analysis - Look into the data this way to see if __HOW__ different these are
+
+This is an ECDF between the Phase 2 runs. This compares CDC ONLY data between the two PCR runs as we adjusted changes. Done so I can include the CDC data with little change in code.
+Appears to have little difference, likely insignifant- will need to run stats.
+![SS300-ECDF.PCR](../../results/SS300-ECDF.PCR.png)
+
+###### 
+Exploring the 
+
+![SS300-ECDF.Type](../../results/SS300-ECDF.Type.png) 
+
+
+![SS300-ECDF.Method](../../results/SS300-ECDF.Method.png)

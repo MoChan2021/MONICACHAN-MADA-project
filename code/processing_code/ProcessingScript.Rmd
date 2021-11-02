@@ -18,7 +18,7 @@ library(broom)    #for tidying up if needed
 
 ```
 ####
-__Eventually this will read in the combined dataframe made from separate reports__
+__Eventually this will read in the combined data frame made from separate reports__
 
 For now, this will import a self-maintained csv file to do initial analysis.
 
@@ -57,6 +57,12 @@ All.PCR<-rawdata%>%
 #leaving Ct as Character, for not
 summary(All.PCR)
 ```
+```{r All Data}
+save_data_location <- here::here("data","processed_data","ALL.Data-20211029.rds")
+
+saveRDS(All.PCR, file = save_data_location)
+```
+
 ## Split Data and Save
 
 ### Phase 1 select Data (P1)

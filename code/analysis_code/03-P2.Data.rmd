@@ -1,0 +1,82 @@
+---
+title: "Analysis 03 - Phase 2 Data"
+author: "MYC"
+date: "11/1/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr) #for data processing
+library(ggplot2) #for plotting
+library(broom) #for cleaning up output from lm()
+library(here) #for data loading/saving
+
+```
+Path to data
+```{r Data}
+#note the use of the here() package and not absolute paths
+data_location <- here::here("data","processed_data","P2-20211029.rds")
+#read and load data. 
+P2<- readRDS(data_location)
+```
+
+# Summarize the Data
+
+```{r}
+p2mysummary <- summary(P2)
+```
+
+```{r}
+#re-shape of a data frame (for easier saving/showing in manuscript)
+P2summary_df <- data.frame(do.call(cbind, lapply(P2, summary)))
+```
+```{r}
+
+```
+
+```{r}
+#save data frame table to file for later use in manuscript
+summarytable_file <- here::here("products","Project_Parts","Part_3", "P2.Summary.Table.rds")
+saveRDS(P2summary_df, file = summarytable_file)
+```
+
+Make a scatterplot of data
+
+```{r}
+P2P1<-P2 %>% 
+  filter(Method!="PCR", Tool=="SD"|Tool=="NEG.CTRL")%>%
+  ggplot(aes(x=Dilution, y=Ct)) + 
+  geom_jitter(aes(color=Method)) + 
+  #we also add a linear regression line to it
+  geom_smooth(method='glm',alpha=0.2, aes(fill=Method, color=Method))+
+  facet_grid(Detector~.)+
+  scale_y_reverse()+
+  geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  labs(title="Serial Dilution Comparisons within Phase 1 data")
+
+print(P2P1)
+```
+```{r}
+#save figure
+figure_file = here("results","P2-SD-Plot.png")
+ggsave(filename = figure_file, plot=P2P1) 
+```
+
+```{r ALL Data fit and stat analysis}
+
+```
+######################################
+#Data fitting/statistical analysis
+######################################
+```{r}
+# fit glm.
+# Ct~X= odds of Ct as response variable
+P2.glm.fit<-glm(Ct~Dilution+Detector, data=P2P1)
+#look at fit
+print(tidy(P2.glm.fit))
+
+step(P2.glm.fit, test="LRT")
+```
+
