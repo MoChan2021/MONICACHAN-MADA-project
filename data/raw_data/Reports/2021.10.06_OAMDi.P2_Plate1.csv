@@ -1,0 +1,105 @@
+Document Name: 2021.10.06_OAMDi.P2_Plate1.sds 
+Plate Type: Standard Curve
+User: Administrator
+
+Document Information
+
+Operator: Administrator
+Run Date: Wednesday, October 06, 2021 14:56:47
+Last Modified: Wednesday, October 06, 2021 16:11:49
+Instrument Type: Applied Biosystems 7500 Fast Real-Time PCR System
+
+Comments:
+SDS v1.4.1
+
+Electronic Signatures
+No associated Electronic Signatures
+
+Thermal Cycler Profile
+Stage,Repetitions,Temperature,Time,Ramp Rate,Auto Increment
+1,1,25.0 °C,2:00,100,,
+2,1,50.0 °C,15:00,100,,
+3,1,95.0 °C,2:00,100,,
+4,45,95.0 °C,0:03,100,,
+,,55.0 °C,0:30,100,,
+Standard 7500 Mode
+Data Collection :  Stage 4 Step 2
+PCR Volume: 20 µL,
+
+Well,Sample Name,Detector,Task,Ct,StdDev Ct,Qty,Mean Qty,StdDev Qty,Filtered,Tm,User Defined #1,User Defined #2,User Defined #3
+A1,NTC N1,N1 Probe,Unknown,Undetermined,,,,,,
+A3,NEG.CTRL-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+A5,SD-4-CDC0300 N1,N1 Probe,Unknown,26.7547,,,,,,
+A6,SD-3-CDC0300 N1,N1 Probe,Unknown,24.1689,,,,,,
+A7,SD-2-CDC0300 N1,N1 Probe,Unknown,20.234,,,,,,
+A8,SD-1-CDC0300 N1,N1 Probe,Unknown,18.0667,,,,,,
+A10,POS.CTRL-CDC0300 N1,N1 Probe,Unknown,26.3075,,,,,,
+A12,nCoV PC N1,N1 Probe,Unknown,19.1612,,,,,,
+B3,NEG.CTRL-NTP0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+B5,SD-4-NTP0300 N1,N1 Probe,Unknown,26.8478,,,,,,
+B6,SD-3-NTP0300 N1,N1 Probe,Unknown,23.4997,,,,,,
+B7,SD-2-NTP0300 N1,N1 Probe,Unknown,20.0032,,,,,,
+B8,SD-1-NTP0300 N1,N1 Probe,Unknown,17.0368,,,,,,
+B10,POS.CTRL-NTP0300 N1,N1 Probe,Unknown,25.8691,,,,,,
+C1,A1-CDC0300 N1,N1 Probe,Unknown,31.3731,0.155,,,,,
+C2,A1-CDC0300 N1,N1 Probe,Unknown,31.1541,0.155,,,,,
+C3,A2-CDC0300 N1,N1 Probe,Unknown,31.2159,0.302,,,,,
+C4,A2-CDC0300 N1,N1 Probe,Unknown,30.7885,0.302,,,,,
+C5,A3-CDC0300 N1,N1 Probe,Unknown,30.5191,0.32,,,,,
+C6,A3-CDC0300 N1,N1 Probe,Unknown,30.0669,0.32,,,,,
+C7,B1-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+C8,B1-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+C9,B2-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+C10,B2-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+C11,B3-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+C12,B3-CDC0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+D1,A1-NTP0300 N1,N1 Probe,Unknown,29.1164,0.145,,,,,
+D2,A1-NTP0300 N1,N1 Probe,Unknown,29.322,0.145,,,,,
+D3,A2-NTP0300 N1,N1 Probe,Unknown,29.3055,0.165,,,,,
+D4,A2-NTP0300 N1,N1 Probe,Unknown,29.0716,0.165,,,,,
+D5,A3-NTP0300 N1,N1 Probe,Unknown,28.9295,0.132,,,,,
+D6,A3-NTP0300 N1,N1 Probe,Unknown,28.7431,0.132,,,,,
+D7,B1-NTP0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+D8,B1-NTP0300 N1,N1 Probe,Unknown,35.6392,,,,,,
+D9,B2-NTP0300 N1,N1 Probe,Unknown,36.1062,0.784,,,,,
+D10,B2-NTP0300 N1,N1 Probe,Unknown,34.9975,0.784,,,,,
+D11,B3-NTP0300 N1,N1 Probe,Unknown,Undetermined,,,,,,
+D12,B3-NTP0300 N1,N1 Probe,Unknown,35.3147,,,,,,
+E1,NTC N2,N2 Probe,Unknown,Undetermined,,,,,,
+E3,NEG.CTRL-CDC0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+E5,SD-4-CDC0300 N2,N2 Probe,Unknown,27.1409,,,,,,
+E6,SD-3-CDC0300 N2,N2 Probe,Unknown,24.0734,,,,,,
+E7,SD-2-CDC0300 N2,N2 Probe,Unknown,20.2647,,,,,,
+E8,SD-1-CDC0300 N2,N2 Probe,Unknown,18.2195,,,,,,
+E10,POS.CTRL-CDC0300 N2,N2 Probe,Unknown,26.4633,,,,,,
+E12,nCoV PC N2,N2 Probe,Unknown,19.5909,,,,,,
+F3,NEG.CTRL-NTP0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+F5,SD-4-NTP0300 N2,N2 Probe,Unknown,27.2603,,,,,,
+F6,SD-3-NTP0300 N2,N2 Probe,Unknown,23.5935,,,,,,
+F7,SD-2-NTP0300 N2,N2 Probe,Unknown,20.3045,,,,,,
+F8,SD-1-NTP0300 N2,N2 Probe,Unknown,17.3671,,,,,,
+F10,POS.CTRL-NTP0300 N2,N2 Probe,Unknown,26.5431,,,,,,
+G1,A1-CDC0300 N2,N2 Probe,Unknown,31.6413,0.221,,,,,
+G2,A1-CDC0300 N2,N2 Probe,Unknown,31.329,0.221,,,,,
+G3,A2-CDC0300 N2,N2 Probe,Unknown,31.302,0.369,,,,,
+G4,A2-CDC0300 N2,N2 Probe,Unknown,30.7797,0.369,,,,,
+G5,A3-CDC0300 N2,N2 Probe,Unknown,30.9838,0.324,,,,,
+G6,A3-CDC0300 N2,N2 Probe,Unknown,31.442,0.324,,,,,
+G7,B1-CDC0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+G8,B1-CDC0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+G9,B2-CDC0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+G10,B2-CDC0300 N2,N2 Probe,Unknown,36.1846,,,,,,
+G11,B3-CDC0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+G12,B3-CDC0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+H1,A1-NTP0300 N2,N2 Probe,Unknown,29.6418,0.202,,,,,
+H2,A1-NTP0300 N2,N2 Probe,Unknown,29.9274,0.202,,,,,
+H3,A2-NTP0300 N2,N2 Probe,Unknown,29.1533,0.244,,,,,
+H4,A2-NTP0300 N2,N2 Probe,Unknown,29.4977,0.244,,,,,
+H5,A3-NTP0300 N2,N2 Probe,Unknown,29.1709,0.0691,,,,,
+H6,A3-NTP0300 N2,N2 Probe,Unknown,29.0732,0.0691,,,,,
+H7,B1-NTP0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+H8,B1-NTP0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+H9,B2-NTP0300 N2,N2 Probe,Unknown,Undetermined,,,,,,
+H10,B2-NTP0300 N2,N2 Probe,Unknown,35.0181,,,,,,
+H11,B3-NTP0300 N2,N2 Probe,Unknown,33.0107,2.06,,,,,
+H12,B3-NTP0300 N2,N2 Probe,Unknown,35.9307,2.06,,,,,

@@ -1,0 +1,113 @@
+Document Name: 2021.05.11_CDCvCERES1_MYC.sds 
+Plate Type: Standard Curve
+User: INSTR-ADMIN
+
+Document Information
+
+Operator: Administrator
+Run Date: Tuesday, May 11, 2021 16:13:23
+Last Modified: Tuesday, May 11, 2021 17:25:02
+Instrument Type: Applied Biosystems 7500 Fast Real-Time PCR System
+Exporting Mode: Based on Selected Wells and Report Setting
+Comments:
+SDS v1.4.1
+
+Electronic Signatures
+No associated Electronic Signatures
+
+Thermal Cycler Profile
+Stage,Repetitions,Temperature,Time,Ramp Rate,Auto Increment
+1,1,25.0 °C,2:00,100,,
+2,1,50.0 °C,15:00,100,,
+3,1,95.0 °C,2:00,100,,
+4,45,95.0 °C,0:03,100,,
+,,55.0 °C,0:30,100,,
+Standard 7500 Mode
+Data Collection :  Stage 4 Step 2
+PCR Volume: 20 µL,
+
+Well,Sample Name,Detector,Task,Ct,StdDev Ct,Quantity,Mean Qty,StdDev Qty,Filtered,Tm,User Defined #1,User Defined #2,User Defined #3
+A1,CDC 120 I,N1 Probe,Unknown,31.3614,0.358-999.9,,,,,,,,
+A2,CDC 120 I,N1 Probe,Unknown,30.8557,0.358-999.9,,,,,,,,
+A3,CDC 120 II,N1 Probe,Unknown,36.3333,1.92-999.9,,,,,,,,
+A4,CDC 120 II,N1 Probe,Unknown,33.6235,1.92-999.9,,,,,,,,
+A5,CDC 120 III,N1 Probe,Unknown,Undetermined,,,,,,,,,
+A6,CDC 120 III,N1 Probe,Unknown,35.0058,-999.9,,,,,,,,
+A7,CDC 120 I,N2 Probe,Unknown,33.3794,0.22-999.9,,,,,,,,
+A8,CDC 120 I,N2 Probe,Unknown,33.6905,0.22-999.9,,,,,,,,
+A9,CDC 120 II,N2 Probe,Unknown,37.9649,1.35-999.9,,,,,,,,
+A10,CDC 120 II,N2 Probe,Unknown,36.0601,1.35-999.9,,,,,,,,
+A11,CDC 120 III,N2 Probe,Unknown,Undetermined,,,,,,,,,
+A12,CDC 120 III,N2 Probe,Unknown,39.7256,-999.9,,,,,,,,
+B1,CDC 300 I,N1 Probe,Unknown,29.7982,0.0392-999.9,,,,,,,,
+B2,CDC 300 I,N1 Probe,Unknown,29.8536,0.0392-999.9,,,,,,,,
+B3,CDC 300 II,N1 Probe,Unknown,34.3688,0.987-999.9,,,,,,,,
+B4,CDC 300 II,N1 Probe,Unknown,32.9725,0.987-999.9,,,,,,,,
+B5,CDC 300 III,N1 Probe,Unknown,Undetermined,,,,,,,,,
+B6,CDC 300 III,N1 Probe,Unknown,35.4453,-999.9,,,,,,,,
+B7,CDC 300 I,N2 Probe,Unknown,32.2032,0.13-999.9,,,,,,,,
+B8,CDC 300 I,N2 Probe,Unknown,32.3864,0.13-999.9,,,,,,,,
+B9,CDC 300 II,N2 Probe,Unknown,34.9339,0.155-999.9,,,,,,,,
+B10,CDC 300 II,N2 Probe,Unknown,34.7147,0.155-999.9,,,,,,,,
+B11,CDC 300 III,N2 Probe,Unknown,Undetermined,,,,,,,,,
+B12,CDC 300 III,N2 Probe,Unknown,Undetermined,,,,,,,,,
+C1,CERES 300 II,N1 Probe,Unknown,Undetermined,0.0303,,,,,,,,
+C2,CERES 300 II,N1 Probe,Unknown,Undetermined,0.0303,,,,,,,,
+C3,CERES 300 II,N1 Probe,Unknown,32.147,0.0303-999.9,,,,,,,,
+C4,CERES 300 II,N1 Probe,Unknown,32.1899,0.0303-999.9,,,,,,,,
+C5,CERES 300  I,N1 Probe,Unknown,29.0515,0.0272-999.9,,,,,,,,
+C6,CERES 300  I,N1 Probe,Unknown,29.0131,0.0272-999.9,,,,,,,,
+C7,CERES 300 I,N2 Probe,Unknown,32.4295,0.0315-999.9,,,,,,,,
+C8,CERES 300 I,N2 Probe,Unknown,32.4741,0.0315-999.9,,,,,,,,
+C9,CERES 300 II,N2 Probe,Unknown,35.4714,0.61-999.9,,,,,,,,
+C10,CERES 300 II,N2 Probe,Unknown,36.3336,0.61-999.9,,,,,,,,
+C11,CERES 300  III,N2 Probe,Unknown,39.5427,-999.9,,,,,,,,
+C12,CERES 300  III,N2 Probe,Unknown,Undetermined,,,,,,,,,
+D1,CERES 1000 I,N1 Probe,Unknown,Undetermined,,,,,,,,,
+D2,CERES 1000 I,N1 Probe,Unknown,Undetermined,,,,,,,,,
+D3,CERES 1000 II,N1 Probe,Unknown,Undetermined,,,,,,,,,
+D4,CERES 1000 II,N1 Probe,Unknown,Undetermined,,,,,,,,,
+D5,CERES 1000 III,N1 Probe,Unknown,Undetermined,,,,,,,,,
+D6,CERES 1000 III,N1 Probe,Unknown,Undetermined,,,,,,,,,
+D7,CERES 1000 I,N2 Probe,Unknown,Undetermined,,,,,,,,,
+D8,CERES 1000 I,N2 Probe,Unknown,Undetermined,,,,,,,,,
+D9,CERES 1000 II,N2 Probe,Unknown,Undetermined,,,,,,,,,
+D10,CERES 1000 II,N2 Probe,Unknown,Undetermined,,,,,,,,,
+D11,CERES 1000 III,N2 Probe,Unknown,Undetermined,,,,,,,,,
+D12,CERES 1000 III,N2 Probe,Unknown,Undetermined,,,,,,,,,
+E1,CERES Remains I,N1 Probe,Unknown,25.8687,0.251-999.9,,,,,,,,
+E2,CERES Remains I,N1 Probe,Unknown,26.2235,0.251-999.9,,,,,,,,
+E3,CERES Remains II,N1 Probe,Unknown,29.2288,0.233-999.9,,,,,,,,
+E4,CERES Remains II,N1 Probe,Unknown,28.8996,0.233-999.9,,,,,,,,
+E5,CERES Remains III,N1 Probe,Unknown,33.5526,0.35-999.9,,,,,,,,
+E6,CERES Remains III,N1 Probe,Unknown,33.0573,0.35-999.9,,,,,,,,
+E7,CERES Remains I,N2 Probe,Unknown,29.3977,0.0671-999.9,,,,,,,,
+E8,CERES Remains I,N2 Probe,Unknown,29.4927,0.0671-999.9,,,,,,,,
+E9,CERES Remains II,N2 Probe,Unknown,34.0411,0.0163-999.9,,,,,,,,
+E10,CERES Remains II,N2 Probe,Unknown,34.0643,0.0163-999.9,,,,,,,,
+E11,CERES Remains III,N2 Probe,Unknown,37.078,0.346-999.9,,,,,,,,
+E12,CERES Remains III,N2 Probe,Unknown,37.568,0.346-999.9,,,,,,,,
+G1,A1-0,N1 Probe,Unknown,Undetermined,,,,,,,,,
+G2,CDC -5,N1 Probe,Unknown,30.364,-999.9,,,,,,,,
+G3,CDC -4,N1 Probe,Unknown,28.1922,-999.9,,,,,,,,
+G4,CDC -3,N1 Probe,Unknown,25.1057,-999.9,,,,,,,,
+G5,NTC,N1 Probe,Unknown,Undetermined,,,,,,,,,
+G6,CDC-2,N1 Probe,Unknown,Undetermined,,,,,,,,,
+G7,A1-0,N2 Probe,Unknown,Undetermined,,,,,,,,,
+G8,CDC -5,N2 Probe,Unknown,33.9719,-999.9,,,,,,,,
+G9,CDC -4,N2 Probe,Unknown,30.7168,-999.9,,,,,,,,
+G10,CDC -3,N2 Probe,Unknown,26.9012,-999.9,,,,,,,,
+G11,CDC -2,N2 Probe,Unknown,22.4815,-999.9,,,,,,,,
+G12,NTC,N2 Probe,Unknown,Undetermined,,,,,,,,,
+H1,B3-0,N1 Probe,Unknown,Undetermined,,,,,,,,,
+H2,CERES -5,N1 Probe,Unknown,29.0062,-999.9,,,,,,,,
+H3,CERES -4,N1 Probe,Unknown,25.7168,-999.9,,,,,,,,
+H4,CERES -3,N1 Probe,Unknown,23.1812,-999.9,,,,,,,,
+H5,CERES -2,N1 Probe,Unknown,19.8442,-999.9,,,,,,,,
+H6,POS,N1 Probe,Unknown,Undetermined,,,,,,,,,
+H7,B3-0,N2 Probe,Unknown,Undetermined,,,,,,,,,
+H8,CERES -5,N2 Probe,Unknown,31.7854,-999.9,,,,,,,,
+H9,CERES -4,N2 Probe,Unknown,28.121,-999.9,,,,,,,,
+H10,CERES -3,N2 Probe,Unknown,25.7798,-999.9,,,,,,,,
+H11,CERES -2,N2 Probe,Unknown,22.4129,-999.9,,,,,,,,
+H12,POS,N2 Probe,Unknown,Undetermined,,,,,,,,,
