@@ -19,6 +19,14 @@ List of asks:
 * CDC vs NTP
 * NTP 300 vs NTP 1000
 
+
+
+Path to Processed Data and loading of cleaned data
+```{r load data}
+data_location <- here::here("data","processed_data","P2-20211029.rds")
+data<- readRDS(data_location)
+glimpse(data)
+```
 ```{r}
 data%>%
   group_by(Detector, Method, Tool, Input)%>%
@@ -27,14 +35,6 @@ data%>%
             Ct=mean(Ct))%>%
   mutate(tools=(n/2))
 ```
-
-Path to Processed Data and loading of cleaned data
-```{r load data}
-data_location <- here::here("data","processed_data","P2.Processed.rds")
-data<- readRDS(data_location)
-glimpse(data)
-```
-
 # A vs B
 
 Tools are used to sample different concntrations of seeded virus.
@@ -45,7 +45,7 @@ data%>%
   filter(Tool%in% c("A", "B"))%>%
   count(Method)
 
-data%>% 
+AsksP2P1<-data%>% 
   filter(Tool%in% c("A", "B"), Input!="6400")%>%
   ggplot(aes(x=Tool, y= Ct))+
   geom_boxplot(aes(color=Method))+
@@ -55,8 +55,15 @@ data%>%
   scale_y_reverse()+
   labs(y="Ct Value",
        x=NULL,
-       title="Comparing A and B tool recovery")
+       title="Phase 2 Comparing A and B tool recovery")
+
+print(AsksP2P1)
   
+```
+```{r}
+#save figure
+figure_file = here("results","ASK-P2P1-Tools.png")
+ggsave(filename = figure_file, plot=AsksP2P1) 
 ```
 Tool A has an average Ct recovery higher than B. This makes sense as the surfaces A recovered from is 2 logs higher (-1) than that of B (-3). A log drop is ~3Ct values we can see from the graphic that it trends as predicted.
 Suggests that 
@@ -66,7 +73,7 @@ Suggests that
 
 Compare the different extraction methods Serial Dilutions
 ```{r}
-data%>%
+AsksP2P2<-data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
   filter(Tool=="SD", Input=="300")%>%
   ggplot(aes(x=Dilution, y=Ct, color=Method))+
@@ -78,7 +85,14 @@ data%>%
   facet_wrap(Detector~Tool)+
   labs(title = "Serial Dilution comparisons between CDC and NTP Methods, Input at 300.")
 
+print(AsksP2P2)
 ```
+```{r}
+#save figure
+figure_file = here("results","ASK-P2P2-Methods.png")
+ggsave(filename = figure_file, plot=AsksP2P2) 
+```
+
 Serial dilution data between CDC and NTP.
 Noting that all SD are in the confirmed realm of under 27 Ct Value
 CDC method is better than NTP at -1 concentration of the SD.
@@ -90,7 +104,7 @@ Might be significant difference at the -4 dilution.
 
 Compare between extraction methods at input 300
 ```{r}
-data%>%
+AsksP2P3<- data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
   filter(Input=="300")%>%
   ggplot(aes(x=Dilution, y=Ct, color=Tool))+
@@ -100,15 +114,20 @@ data%>%
   geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
   geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
   facet_wrap(Method~Detector)+
-  labs(title="Method extraction comparisons with standard input")
+  labs(title="Method extraction comparisons with standard input (300)")
 
+print(AsksP2P3)
 ```
-
+```{r}
+#save figure
+figure_file = here("results","ASK-P2P3-Methods0300.png")
+ggsave(filename = figure_file, plot=AsksP2P3) 
+```
 
 
 Compare between extraction methods with additional inputs
 ```{r}
-data%>%
+AsksP2P4<-data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
   filter(Input!="CTRL")%>%
   ggplot(aes(x=Dilution, y=Ct, shape=Tool, color=Input))+
@@ -119,24 +138,38 @@ data%>%
   geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
   facet_wrap(Method~Detector)+
   labs(title="Method extraction comparisons with all inputs and tools")
-```
 
+print(AsksP2P4)
+```
+```{r}
+#save figure
+figure_file = here("results","ASK-P2P4-MethodsALL.png")
+ggsave(filename = figure_file, plot=AsksP2P4) 
+```
 
 # NTP Input variations
 
 Serial Dilution
 ```{r}
-data%>%
+AsksP2P5<-data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
   filter(Method=="NTP", Tool=="SD", Input!="CTRL", Input!="6800")%>%
-  ggplot(aes(x=Dilution, y=Ct, color=Input, shape=Input))+
+  ggplot(aes(x=Dilution, y=Ct, color=Input))+
   scale_y_reverse()+
   geom_jitter()+
   geom_smooth(method=lm, se=FALSE, fullrange=TRUE)+
   geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
   facet_wrap(.~Detector)+
   labs(title="Comparing Input levels on the Serial Dilituions with for the NTP method.")
+
+print(AsksP2P5)
 ```
+```{r}
+#save figure
+figure_file = here("results","ASK-P2P5-NTP-SD.png")
+ggsave(filename = figure_file, plot=AsksP2P5) 
+```
+
 NTP SD is similar to CDC SD in that the Ct values remain under 27, the most "confirmed" presence of nCoV-2.
 Interesting! Looks like 300 input is really the lowest and as the inputs increase they kind of converge together at the -3 dilution level. 
 Interpretation:
@@ -147,10 +180,10 @@ If we could determine how many copies are in the -3 dilution we may be able to b
 
 NTP
 ```{r}
-data%>%
+AsksP2P6<-data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
   filter(Method=="NTP", Input=="300"|Input=="1000")%>%
-  ggplot(aes(x=Dilution, y=Ct, shape=Input, color=Tool))+
+  ggplot(aes(x=Dilution, y=Ct, color=Tool))+
   scale_y_reverse()+
   geom_jitter()+
   geom_smooth(method=glm, fullrange=TRUE)+
@@ -158,17 +191,23 @@ data%>%
   geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
   facet_wrap(.~Detector)+
   labs(title="NTP extraction comparisons with all at 300 and 1000 input levels and all tools")
+print(AsksP2P6)
+```
+```{r}
+#save figure
+figure_file = here("results","ASK-P2P6-NTP.png")
+ggsave(filename = figure_file, plot=AsksP2P6) 
 ```
 
-
 NTP
+NTP extraciton comparisons wluent input levels and all tools
 ```{r}
 data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
   filter(Method=="NTP", Tool!="SD", Input>=6000, Input!="CTRL")%>%
-  ggplot(aes(x=Dilution, y=Ct, color=Input))+
+  ggplot(aes(x=Dilution, y=Ct))+
   scale_y_reverse()+
-  geom_boxplot(aes(fill=Input))+
+  geom_boxplot(aes())+
   geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
   facet_grid(Tool~Detector)+
   labs(title="NTP extraction comparisons Eluents input levels and all tools")

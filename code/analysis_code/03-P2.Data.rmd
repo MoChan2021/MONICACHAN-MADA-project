@@ -54,7 +54,7 @@ P2P1<-P2 %>%
   scale_y_reverse()+
   geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
   geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
-  labs(title="Serial Dilution Comparisons within Phase 1 data")
+  labs(title="Serial Dilution Comparisons within Phase 2 data")
 
 print(P2P1)
 ```

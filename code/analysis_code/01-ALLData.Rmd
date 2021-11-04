@@ -32,7 +32,12 @@ mysummary <- summary(ALL)
 summary_df <- data.frame(do.call(cbind, lapply(ALL, summary)))
 ```
 ```{r}
-
+ALL%>%
+  filter(Method!="PCR", Dilution!="NA")%>%
+  group_by(Detector, Method, Dilution, Input)%>%
+  summarise(n=n(),
+            "Average Ct"= mean(Ct)
+            )
 ```
 
 ```{r}
@@ -82,8 +87,8 @@ step(ALL.glm.fit, test="LRT")
 ```
 ```{r}
 # save fit results table  
-table_file = here("results", "resulttable.rds")
-saveRDS(lmtable, file = table_file)
+table_file = here("results", "AllGLM.resulttable.rds")
+saveRDS(ALL.glm.fit, file = table_file)
 
 ```
 
