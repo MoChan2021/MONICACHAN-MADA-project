@@ -1,0 +1,87 @@
+---
+title: "Cleaning_Reports"
+author: "MYC"
+date: "10/29/2021"
+output: html_document
+---
+Trying to determine the best way to read in excel reports for more automated data building.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(here)
+library(tidyverse)
+library(lubridate)
+library(fs)
+```
+## Read in Reports 
+Reports are generated in .csv outputs.
+Would like to be able to read in each individual file from data\raw_data\Reports
+```{r Path to Reports}
+#set the directory/file location of reports
+data_dir<-(here::here("data","raw_data","Reports"))
+
+#create path for all csv files in directory of reports
+csv_files<-fs::dir_ls(data_dir, # shows list of files in directory
+                      regexp = "\\.csv$") #select only.csv files 
+```
+
+## Read section of reports
+From read in data frames need to pull out a selection of data from A21:F12 (includes headers)
+
+```{r Read and select from Reports}
+
+# read a single report in as a data frame
+Report01<-read.csv(csv_files[1],nrow=94, skip=28)[,1:6] #range finding phases
+Report02<-read.csv(csv_files[2],nrow=94, skip=28)[,1:6]#range finding phases
+Report03<-read.csv(csv_files[3],nrow=94, skip=28)[,1:6]#range finding phases
+Report04<-read.csv(csv_files[4],nrow=94, skip=28)[,1:6]#range finding phases
+Report05<-read.csv(csv_files[5],nrow=94, skip=28)[,1:6]#range finding phases
+Report06<-read.csv(csv_files[6],nrow=76, skip=28)[,1:6] #starts Phase 2
+Report07<-read.csv(csv_files[7],nrow=76, skip=28)[,1:6] #starts Phase 2
+Report08<-read.csv(csv_files[8],nrow=76, skip=28)[,1:6] #starts Phase 2
+Report09<-read.csv(csv_files[9],nrow=76, skip=28)[,1:6] #starts Phase 2
+Report10<-read.csv(csv_files[10],nrow=76, skip=28)[,1:6] #starts Phase 2
+Report11<-read.csv(csv_files[11],nrow=76, skip=28)[,1:6] #starts Phase 2
+
+
+```
+
+```{r All Data}
+#merge all same variables from all reports
+AllData<-rbind(Report01,
+      Report02,
+      Report03,
+      Report04,
+      Report05,
+      Report06,
+      Report07,
+      Report08,
+      Report09,
+      Report10,
+      Report11
+      )
+```
+
+```{r P1}
+#selective merge of data for part 1
+P1<-rbind(Report01,
+      Report02,
+      Report03,
+      Report04,
+      Report05
+      )
+```
+
+
+```{r P2}
+#selective merge of data part 2
+P2<-rbind(
+      Report06,
+      Report07,
+      Report08,
+      Report09,
+      Report10,
+      Report11
+      )
+```
+

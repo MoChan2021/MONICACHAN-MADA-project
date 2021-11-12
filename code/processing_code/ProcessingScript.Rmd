@@ -8,6 +8,9 @@ output:
 editor_options: 
   chunk_output_type:
 ---
+This script loads the 2021-10-23_All.Update.csv, a composite of reports, from `raw-data`.
+The script further processes, cleans, splits, and saves the data as rds files in the `processed_data` folder.
+
 Loading all the default settings and preliminary programs.
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -92,16 +95,6 @@ save_data_location <- here::here("data","processed_data","P2-20211029.rds")
 
 saveRDS(Phase2Data, file = save_data_location)
 ```
-
-
-
-
-
-
-
-
-
-
 
 Confirm Path to Processed Data and loading of cleaned data
 ```{r load data}

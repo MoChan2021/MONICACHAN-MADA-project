@@ -5,8 +5,6 @@ date: "10/25/2021"
 output: 
   html_document:
     theme: cosmo
-editor_options: 
-  chunk_output_type: console
 ---
 Loading all the default settings and preliminary programs.
 ```{r setup, include=FALSE}
