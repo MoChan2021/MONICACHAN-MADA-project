@@ -12,6 +12,8 @@ Real-time rt-PCR data reports evaluation of extraction methods utilized in the r
 2. Is there a difference between methods?
 3. Are there any additional effects the recovery? (P1 (spike) vs P2 (tool sampling))
 
+__Bonus__: Playing with models. 
+
 ## File Structure
 
 * All data are contained/exported to respective sub-folders within `data` folder.
@@ -26,7 +28,7 @@ Real-time rt-PCR data reports evaluation of extraction methods utilized in the r
 
 Code to run are found in the `code` file from main repo.
 
-### Processing raw data
+### Processing raw data (Run first to create data for analysis)
 
 1. Raw data has been compiled and deposited in `raw_data` folder.
 2. code/`processing_code` folder contains rmd file processing and cleaning compiled data set `ProcessingScript.Rmd`

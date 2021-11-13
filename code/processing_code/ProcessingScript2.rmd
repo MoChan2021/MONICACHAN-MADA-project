@@ -28,7 +28,8 @@ summary(P2)
 
 melt(P2, 
      id.vars = c("Detector", "Method", "Tool"),
-     measure.vars = c("Input","Ct"))%>%
+     measure.vars = c("Input","Ct"))%>% 
+  group_by(Detector,Method, Tool)%>%
   summarise(n=n())
 
 ```

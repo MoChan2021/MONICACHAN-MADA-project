@@ -38,7 +38,7 @@ P2summary_df <- data.frame(do.call(cbind, lapply(P2, summary)))
 ```{r}
 #save data frame table to file for later use in manuscript
 summarytable_file <- here::here("products","Project_Parts","Part_3", "P2.Summary.Table.rds")
-saveRDS(P2summary_df, file = summarytable_file)
+#saveRDS(P2summary_df, file = summarytable_file)
 ```
 
 Make a scatterplot of data

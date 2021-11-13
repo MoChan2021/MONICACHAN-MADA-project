@@ -6,11 +6,11 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: article
 output:
+  bookdown::html_document2: 
+    toc: false
   bookdown::word_document2: 
     toc: false
     number_sections: true
-  bookdown::html_document2: 
-    toc: false
 bibliography: ../references.bib
 csl: ../apa.csl
 ---
@@ -22,7 +22,7 @@ Applying MADA learned techniques to a RT-PCR dataset to determine the effectiven
 # Introduction 
 
 ##  Background
-The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens. Although many viruses have a low infectious dose, they can be difficult to detect due to the low bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices.
+The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens [@Marcenac2021-sz]. Although many viruses have a low infectious dose, they can be difficult to detect due to the low bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control [@Paton2021-jc]. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices.
 
 ### Questions/Hypotheses to be addressed
 
@@ -44,7 +44,7 @@ In addition to the comparison of enhancement strategies the effects of the tool 
 
 ### Experiment setup and conditions
 
-Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR
+Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR [@Wittwer2012-vt][@Shah2021-mb].
 
 
 ## Data aquisition
@@ -62,6 +62,10 @@ Data was then split between the two different experimental types (P1 and P2).
 This can be found in processing_code/ProcessingScript.RMD
 
 ### Data exploration
+
+Direction was influenced by [@Weir2016-sj] on "Effect fo Surface Sampling and Recovery of Viruses and No-Spore-Forming Bacteria on a Quantitative Microbial Risk Assessment Model for Fomites".
+
+Atempt to do as [@Brandolini2021-ja]
 
 #### All Data
 
@@ -153,14 +157,14 @@ Example table \@ref(tab:resulttable) shows a table summarizing a linear model fi
 # Discussion
 
 ## Summary and Interpretation
-_Summarize what you did, what you found and what it means._
+Took 
 
 ## Strengths and Limitations
-_Discuss what you perceive as strengths and limitations of your analysis._
+Need more replicates, but this is a time consuming processes just to get the data.
+
+Additional materials need to be considered [@Jansson2020-cg].
 
 ## Conclusions
-_What are the main take-home messages?_
-
 
 # References
 

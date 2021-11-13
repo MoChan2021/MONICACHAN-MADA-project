@@ -174,12 +174,13 @@ pre code {
 <h3>Evaluation of extraction techniques on the surface recovery of heat-inactivated SARS-nCoV-2</h3>
 <p>Real-time rt-PCR data reports evaluation of extraction methods utilized in the recovery of RNA copies of heat-inactivated SARS-nCoV-2 from stainless steel surfaces by macrofoam swabs.</p>
 <div id="key-questions" class="section level4">
-<h4>Key Questions</h4>
+<h4>Key Questions:</h4>
 <ol style="list-style-type: decimal">
 <li>Do the methods evaluated work? (Y/N extraction)</li>
 <li>Is there a difference between methods?</li>
 <li>Are there any additional effects the recovery? (P1 (spike) vs P2 (tool sampling))</li>
 </ol>
+<p><strong>Bonus</strong>: Playing with models.</p>
 </div>
 </div>
 <div id="file-structure" class="section level2">
@@ -203,11 +204,11 @@ pre code {
 <div id="general-instructions-for-reproducable-analysis" class="section level2">
 <h2>General instructions for reproducable analysis</h2>
 <p>Code to run are found in the <code>code</code> file from main repo.</p>
-<div id="processing-raw-data" class="section level3">
-<h3>Processing raw data</h3>
+<div id="processing-raw-data-run-first-to-create-data-for-analysis" class="section level3">
+<h3>Processing raw data (Run first to create data for analysis)</h3>
 <ol style="list-style-type: decimal">
 <li>Raw data has been compiled and deposited in <code>raw_data</code> folder.</li>
-<li>code/<code>processing_code</code> folder contains rmd file processing and cleaning compiled data <code>Cleaning_Reports.Rmd</code>
+<li>code/<code>processing_code</code> folder contains rmd file processing and cleaning compiled data set <code>ProcessingScript.Rmd</code>
 <ul>
 <li>Data has been cleaned, split, and saved as rds files in <code>data</code>/<code>processed-data</code> for use in analysis.
 <ul>
@@ -264,6 +265,7 @@ pre code {
 <h2>Additional Notes</h2>
 <ul>
 <li><code>readme.md</code> files in each folder detail additional information of files found in folder and respective sub-folders.</li>
+<li><code>ARCHIVE</code> folder in main repository contains versions of code and outputs that were deemed unnecessary as not utilized in the final report.</li>
 </ul>
 </div>
 </div>

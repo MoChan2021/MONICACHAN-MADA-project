@@ -20,7 +20,7 @@ Would like to be able to read in each individual file from data\raw_data\Reports
 #set the directory/file location of reports
 data_dir<-(here::here("data","raw_data","Reports"))
 
-#create path for all csv files in directory of reports
+#create path for all csv files in directory
 csv_files<-fs::dir_ls(data_dir, # shows list of files in directory
                       regexp = "\\.csv$") #select only.csv files 
 ```
