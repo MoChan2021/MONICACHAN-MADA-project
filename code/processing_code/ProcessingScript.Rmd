@@ -2,11 +2,7 @@
 title: "Data Processing and Saving"
 author: "MYC"
 date: "10/29/2021"
-output: 
-  html_document:
-    theme: cosmo
-editor_options: 
-  chunk_output_type:
+output: html_document
 ---
 This script loads the 2021-10-23_All.Update.csv, a composite of reports, from `raw-data`.
 The script further processes, cleans, splits, and saves the data as rds files in the `processed_data` folder.
@@ -94,11 +90,4 @@ summary(Phase2Data)
 save_data_location <- here::here("data","processed_data","P2-20211029.rds")
 
 saveRDS(Phase2Data, file = save_data_location)
-```
-
-Confirm Path to Processed Data and loading of cleaned data
-```{r load data}
-data_location <- here::here("data","processed_data",".rds")
-data<- readRDS(data_location)
-glimpse(data)
 ```

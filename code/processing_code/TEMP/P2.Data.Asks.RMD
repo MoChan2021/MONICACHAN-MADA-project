@@ -182,14 +182,14 @@ NTP
 ```{r}
 AsksP2P6<-data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
-  filter(Method=="NTP", Input=="300"|Input=="1000")%>%
+  filter(Method=="NTP", Input<=6000)%>%
   ggplot(aes(x=Dilution, y=Ct, color=Tool))+
   scale_y_reverse()+
   geom_jitter()+
   geom_smooth(method=glm, fullrange=TRUE)+
   geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
   geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
-  facet_wrap(.~Detector)+
+  facet_wrap(Input~Detector)+
   labs(title="NTP extraction comparisons with all at 300 and 1000 input levels and all tools")
 print(AsksP2P6)
 ```
@@ -200,17 +200,19 @@ ggsave(filename = figure_file, plot=AsksP2P6)
 ```
 
 NTP
-NTP extraciton comparisons wluent input levels and all tools
+NTP extraciton comparisons with eluent input levels and all tools
 ```{r}
 data%>%
   mutate(Dilution=as.numeric(as.factor(Dilution)))%>%
-  filter(Method=="NTP", Tool!="SD", Input>=6000, Input!="CTRL")%>%
-  ggplot(aes(x=Dilution, y=Ct))+
+  filter(Method=="NTP", Input!="CTRL", Input>=6000)%>%
+  ggplot(aes(x=Dilution, y=Ct, color=Tool))+
+  geom_jitter()+
   scale_y_reverse()+
-  geom_boxplot(aes())+
+  geom_smooth(method=glm, fullrange=TRUE)+
   geom_hline(yintercept=27, linetype="longdash", color = "orange")+ #CDC confirmed threshold
-  facet_grid(Tool~Detector)+
-  labs(title="NTP extraction comparisons Eluents input levels and all tools")
+  geom_hline(yintercept=37, linetype="longdash", color = "blue")+ #General confirmed threshold
+  facet_wrap(.~Detector)+
+  labs(title="NTP extraction at Eluent input levels and all tools")
 ```
 Negatives show no detection. Positive controls are at -1 and have smaller Ct value than the A tools which recovered -1 inoculations. Gold line represents the threshold of 27
 

@@ -37,7 +37,7 @@ Testing several sample enhancement strategies (Nanoparticles and Bait & Capture)
 
 In the case the sample enhancements work, we would then compare how well they worked against an automated extraction method. The degree of "wellness" will be determined by how low the Ct value results are produced after a sample has going through a specific method.
 
-In addition to the comparison of enhancement strategies the effects of the tool used for sampling (macrofoam or knit-fiber), time held, and other environmental variables will be explored any significant effects, with interest in positive impacts to detection.
+In addition to the comparison of enhancement strategies the effects of the tool used for sampling (macrofoam or knit-fiber), time held, and other environmental variables will be explored any significant effects, with interest in positive impacts to detection [@Jansson2020-cg].
 
 
 ## Methods and Results

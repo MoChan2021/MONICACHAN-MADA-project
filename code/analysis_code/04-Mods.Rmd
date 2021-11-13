@@ -38,8 +38,14 @@ P2%>%
   count(Input)%>%
   mutate(Proportions =n/sum(n))
 ```
+
+```{r}
+P2%>%
+  mutate(Norm.Ct=Ct/Input)
+```
+
 Data Splitting
-Split into traiining and testing set
+Split into training and testing set
 ```{r}
 # Fix the random numbers by setting the seed 
 # This enables the analysis to be reproducible when random numbers are used 
@@ -137,9 +143,34 @@ Ct~Input*Method
 lm_mod<-linear_reg()%>%
   set_engine("lm")
 
-  lm_mod%>%
-  fit(Ct~Input*Method, data=P2)%>%
-    tidy()
-
+lm_fit<-  lm_mod%>%
+  fit(Ct~Input*Method, data=P2)
+lm_fit
+```
+```{r}
+new_points<- expand.grid(initial_volume=20,
+                         food_regime=)
 ```
 
+```{r}
+  P2%>%
+  filter(Dilution!="NA", Tool!="SD", Tool!="*.CTRL")%>%
+  mutate(
+    Ct.Cat = ifelse(Ct >=38,"Detected","Positive"),
+    Ct.Cat=factor(Ct.Cat))%>%
+  group_by(Dilution,Method,Ct.Cat)%>%
+  summarise(n=n(),
+            mean=mean(Ct))%>%
+  arrange(Dilution,mean)
+```
+```{r Table Best Ct comparing spike and surface recovery}
+  P2%>%
+  filter(Dilution=="-1")%>%
+  mutate(
+    Ct.Cat = ifelse(Ct >=38,"Detected","Positive"),
+    Ct.Cat=factor(Ct.Cat))%>%
+  group_by(Tool,Method,Ct.Cat)%>%
+  summarise(n=n(),
+            mean=mean(Ct))%>%
+  arrange(mean)
+```
