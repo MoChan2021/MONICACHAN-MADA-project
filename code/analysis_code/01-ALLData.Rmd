@@ -25,14 +25,15 @@ ALL<- readRDS(data_location)
 
 ```{r}
 mysummary <- summary(ALL)
+print(mysummary)
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 #re-shape of a data frame (for easier saving/showing in manuscript)
 summary_df <- data.frame(do.call(cbind, lapply(ALL, summary)))
 ```
 ```{r}
-ALL%>%
+All.Summarize<-ALL%>%
   filter(Method!="PCR", Dilution!="NA")%>%
   group_by(Detector, Method, Dilution, Input)%>%
   summarise(n=n(),
@@ -42,8 +43,8 @@ ALL%>%
 
 ```{r}
 #save data frame table to file for later use in manuscript
-summarytable_file <- here::here("products","Project_Parts","Part_3", "All.Summary.Table.rds")
-saveRDS(summary_df, file = summarytable_file)
+summarytable_file <- here::here("products","supplement", "All.Summary.Table.rds")
+saveRDS(All.Summarize, file = summarytable_file)
 ```
 
 Make a scatterplot of data
@@ -76,7 +77,7 @@ ggsave(filename = figure_file, plot=AllP1)
 ######################################
 #Data fitting/statistical analysis
 ######################################
-```{r}
+```{r eval=FALSE, include=FALSE}
 # fit glm.
 # Ct~X= odds of Ct as response variable
 ALL.glm.fit<-glm(Ct~Dilution+Detector+Method, data=ALL)
@@ -85,7 +86,7 @@ print(tidy(ALL.glm.fit))
 
 step(ALL.glm.fit, test="LRT")
 ```
-```{r}
+```{r eval=FALSE, include=FALSE}
 # save fit results table  
 table_file = here("results", "AllGLM.resulttable.rds")
 saveRDS(ALL.glm.fit, file = table_file)

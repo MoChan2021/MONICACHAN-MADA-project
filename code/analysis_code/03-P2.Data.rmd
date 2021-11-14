@@ -36,7 +36,7 @@ P2summary_df <- data.frame(do.call(cbind, lapply(P2, summary)))
 print(P2summary_df)
 ```
 ```{r}
-P2%>%
+P2summary_df<-P2%>%
   filter(Dilution!="NA", Tool!="SD", Tool!="*.CTRL")%>%
   mutate(
     Ct.Cat = ifelse(Ct >=38,"Detected","Positive"),
@@ -49,13 +49,13 @@ P2%>%
 
 ```{r}
 #save data frame table to file for later use in manuscript
-summarytable_file <- here::here("products","Project_Parts","Part_3", "P2.Summary.Table.rds")
-#saveRDS(P2summary_df, file = summarytable_file)
+summarytable_file <- here::here("products","supplement","P2.Summary.Table.rds")
+saveRDS(P2summary_df, file = summarytable_file)
 ```
 
 ```{r Table Best Ct comparing spike and surface recovery}
 #Summary of Tool A compared to -1 Serial Dilution Recovery
-P1.1Dilution.Summary<-P2%>%
+P2.1Dilution.Summary<-P2%>%
   filter(Dilution=="-1")%>%
   mutate(
     Ct.Cat = ifelse(Ct >=38,"Detected","Positive"),
@@ -69,14 +69,14 @@ P1.1Dilution.Summary<-P2%>%
 ```{r}
 #save data frame table to file for later use in manuscript
 summarytable_file <- here::here("products","supplement", "P2.-1Dilution.Table.rds")
-saveRDS(P1.1Dilution.Summary, file = summarytable_file)
+saveRDS(P2.1Dilution.Summary, file = summarytable_file)
 ```
 A difference of 2 Ct values when compared by methods for each tool type. CDC was better when directly extracted. NTP performed better during a spiked tool and surface recovery procedures. 
 Ct loss between Spike and SS recovery are about 3 Ct values, equivalent to a log loss of copies.
 
 Make a scatterplot of data
 
-```{r}
+```{r warning=FALSE}
 P2P1<-P2 %>% 
   filter(Method!="PCR", Tool=="SD"|Tool=="NEG.CTRL")%>%
   ggplot(aes(x=Dilution, y=Ct)) + 
@@ -91,19 +91,8 @@ P2P1<-P2 %>%
 
 print(P2P1)
 ```
-```{r}
+```{r warning=FALSE}
 #save figure
 figure_file = here("results","P2-SD-Plot.png")
 ggsave(filename = figure_file, plot=P2P1) 
 ```
-
-
-
-```{r ALL Data fit and stat analysis}
-
-```
-######################################
-#Data fitting/statistical analysis
-######################################
-
-

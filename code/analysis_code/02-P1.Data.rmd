@@ -37,7 +37,7 @@ P1summary_df <- data.frame(do.call(cbind, lapply(P1, summary)))
 
 ```{r}
 #save data frame table to file for later use in manuscript
-summarytable_file <- here::here("products","Project_Parts","Part_3", "P1.Summary.Table.rds")
+summarytable_file <- here::here("products","supplement", "P1.Summary.Table.rds")
 saveRDS(P1summary_df, file = summarytable_file)
 ```
 
@@ -61,26 +61,3 @@ print(P1P1)
 figure_file = here("results","P1-SD-Plot.png")
 ggsave(filename = figure_file, plot=P1P1) 
 ```
-
-```{r ALL Data fit and stat analysis}
-
-```
-######################################
-#Data fitting/statistical analysis
-######################################
-```{r}
-# fit glm.
-# Ct~X= odds of Ct as response variable
-P1.glm.fit<-glm(Ct~Dilution+Detector+Method, data=P1)
-#look at fit
-print(tidy(P1.glm.fit))
-
-step(P1.glm.fit, test="LRT")
-```
-```{r}
-# save fit results table  
-table_file = here("results", "resulttable.rds")
-saveRDS(lmtable, file = table_file)
-
-```
-
