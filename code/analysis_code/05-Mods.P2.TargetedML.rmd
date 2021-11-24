@@ -1,10 +1,10 @@
 ---
-title: "Random Forest"
+title: "Random Forest- Targeted"
 author: "MYC"
-date: "11/14/2021"
+date: "11/24/2021"
 output: html_document
 ---
-
+Interesting results from the P2 Random Forest ML application, Try more targeted variables 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Helper packages
@@ -27,12 +27,15 @@ Import P2 data
 P2<- readRDS(data_location)
 ```
 
-Add to the data -- Fix so we add a catagorical aspect to Ct values- simplicity make Detected/Yes (< 37.9) and Undetected/No (>38)
+Add to the data -- Fix so we add a categorical aspect to Ct values- simplicity make Detected/Yes (< 37.9) and Undetected/No (>38)
 
-Bonus- try to figure out how to change into 3 levels?
+Compare only dilutions that were -1.
+
+
 ```{r}
-P2.Plus.Cat<-
+P2.minus1<-
   P2%>%
+  filter(Tool!="B")%>% #remove B because this is actually a -3 dilution. Looking specifically at -1, keep SD range. 
   mutate(
 # if greater than ct 38, this is a negative detection, thus less 38 is a positive in detection
     Ct.Cat = ifelse(Ct >=38,"No","Yes"), 
@@ -42,10 +45,10 @@ P2.Plus.Cat<-
     Ct.Cat=factor(Ct.Cat)
     )%>%
 #Remove/adjust so there are no character based factors
-    select(PCR, RH,TEMP, Method, Tool, Input, Detector, Ct, Ct.Cat)%>%
+    select(PCR, RH,TEMP, Method, Tool, Input, Detector, Ct, Ct.Cat,Dilution)%>%
   na.omit()
 
-summary(P2.Plus.Cat)  
+summary(P2.minus1)  
 ```
 
 Set Seed for reproducibility
@@ -61,7 +64,7 @@ set.seed(123)
   
 ```{r}
 # Put 3/4 of the data into the training set; this leaves 1/4 of the data to be used to test 
-data_split <- initial_split(P2.Plus.Cat, prop = 3/4)
+data_split <- initial_split(P2.minus1, prop = 3/4)
 
 ## Create data frames for the two sets:
 train_data <- training(data_split)
@@ -77,17 +80,17 @@ glimpse(test_data)
 2. Creating Models
 
 #  Ct value or Detection as function of method and inital dilution 
-Detection ~ Model + Dilution
+Detection ~ Method + Dilution
 
 # Ct value or detection for all precitcors (short hand for all predictors)
-Detection~., data=P2.Plus.Cat
+Detection~., data=P2.minus1
 
 2.1. Many engines Examples
 ```{r}
 # fit linear model
-lm_lm    <- lm(Ct ~ ., data = P2.Plus.Cat)
+lm_lm    <- lm(Ct ~ ., data = P2.minus1)
 # fit general linear model
-lm_glm   <- glm(Ct ~ ., data = P2.Plus.Cat, 
+lm_glm   <- glm(Ct ~ ., data = P2.minus1, 
                 family = gaussian)
 #########
 #<atempt to use later>
@@ -106,19 +109,19 @@ print(cv_data)
 ############## below are similar functions but need to try
 
 #apply CV in ML algorithm to process the ML model to each resample
-vfold_cv(P2.Plus.Cat, v=5)
+vfold_cv(P2.minus1, v=5)
 
 #bootstrapping- random sample of data with replacment
-bootstraps(P2.Plus.Cat, v=5)
+bootstraps(P2.minus1, v=5)
 ```
 Preprocessing
-Using parsnims to create a recipe for fitting the model
+Using parsnips to create a recipe for fitting the model
 No standardization
 adding dummy variables are added
 ```{r}
 fit_recipe <- 
 # set a recipe
-  recipe(Ct ~ ., data = P2.Plus.Cat) %>%
+  recipe(Ct ~., data = P2.minus1) %>%
 # code all categorical variables as dummy variables
   step_dummy(all_nominal()) 
 
@@ -191,14 +194,14 @@ rf_pred <- predict(best_rf_fit, train_data)
 #pull out the fit object
 x <- best_rf_fit$fit$fit$fit
 #plot variable importance
-P2RFBestFit<-vip::vip(x, num_features = 20)
-print(P2RFBestFit)
+P2RFBestFitminus1<-vip::vip(x, num_features = 20)
+print(P2RFBestFitminus1)
 ```
-Meaning that the point of Tool B is the most important/predictive variable for Ct outcome
+Interesting so Dilution is obviously more important followed by Input. It's more surprizing that the Method is one of the least important in this comparison. Infact the temperature and relative humidity are more impractically thatn the method.
 ```{r warning=FALSE}
 #save figure
-figure_file = here("results","P2-RF-BestFit.png")
-ggsave(filename = figure_file, plot=P2RFBestFit) 
+figure_file = here("results","P2-RF-BestFit-minus1.png")
+ggsave(filename = figure_file, plot=P2RFBestFitminus1) 
 ```
 
 ```{r}
@@ -214,4 +217,54 @@ abline(a=0,b=0, col = 'red') #straight line, along which the results should fall
 ```{r}
 rf_perfomance <- rf_tune_res %>% show_best(n = 5)
 print(rf_perfomance)
+```
+
+# Try to see if Best Tree can show us something
+
+
+Tree model
+```{r}
+tree_model <-  decision_tree() %>% 
+  set_args( cost_complexity = tune(), tree_depth = tune(), min_n = tune()) %>% 
+  set_engine("rpart") %>% 
+  set_mode("regression")      
+```
+Workflow
+```{r}
+#set workflow
+tree_wf <- workflow() %>%
+  add_model(tree_model) %>%
+  add_recipe(fit_recipe)
+```
+Tree Model
+```{r}
+#tuning grid
+tree_grid <- dials::grid_regular(cost_complexity(), tree_depth(), min_n(), levels = 5)
+#tune the model
+tree_tune_res <- tree_wf %>% 
+  tune::tune_grid(
+    resamples = cv_data,
+    grid = tree_grid,
+    metrics = yardstick::metric_set(rmse) 
+  )
+```
+
+```{r}
+#see a plot of performance for different tuning parameters
+tree_tune_res %>% autoplot()
+```
+```{r}
+# get the tuned model that performs best 
+best_tree <- tree_tune_res %>%  select_best(metric = "rmse")
+# finalize workflow with best model
+best_tree_wf <- tree_wf %>% finalize_workflow(best_tree)
+# fitting best performing model
+best_tree_fit <- best_tree_wf %>% 
+                 fit(data = train_data)
+#predicting outcomes for final model
+tree_pred <- predict(best_tree_fit, train_data)
+```
+
+```{r}
+rpart.plot(extract_fit_parsnip(best_tree_fit)$fit)
 ```
