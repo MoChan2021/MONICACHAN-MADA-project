@@ -219,12 +219,12 @@ tree_pred <- predict(best_tree_fit, train_data)
 ```
 
 ```{r}
-rpart.plot(extract_fit_parsnip(best_tree_fit)$fit)
+rpart.plot(extract_fit_parsnip(best_tree_fit)$fit, tweak = 1.2)
 ```
 
 ```{r}
 #predicted versus observed
-plot(tree_pred$.pred,train_data$Ct, xlim =c(0,100), ylim=c(0,100))
+plot(tree_pred$.pred,train_data$Ct)
 abline(a=0,b=1, col = 'red') #45 degree line, along which the results should fall
 
 ```

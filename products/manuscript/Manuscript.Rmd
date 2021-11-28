@@ -57,15 +57,15 @@ Completed run data is then collated into one file and read into R./A composited 
 
 ### Data import and cleaning
 
-processing script.R was modified to do initial cleaning and preparation of the data set for further exploration.
+`processing script.R` was modified to do initial cleaning and preparation of the data set for further exploration.
 
 Data was imported and cleaned. Data was then split between the two different experimental types (P1 and P2).
 
-This can be found in processing_code/ProcessingScript.RMD
+This can be found in `processing_code` folder in repository that generate rds files located in the `data/processed_data` folder.
 
 ### Data exploration
 
-Direction was influenced by [@Weir2016-sj] on "Effect fo Surface Sampling and Recovery of Viruses and No-Spore-Forming Bacteria on a Quantitative Microbial Risk Assessment Model for Fomites".
+Processed data 
 
 #### All Data
 
@@ -98,6 +98,11 @@ knitr::include_graphics("../../results/ASK-P2P1-Tools.png")
 ```
 
 Tool A has an average Ct recovery higher than B. This makes sense as the surfaces A recovered from is 2 logs higher (-1) than that of B (-3). A log drop is \~3Ct values we can see from the graphic that it trends as predicted. Suggests that
+```{r P2-Tool-AB-Sum, eval=FALSE, fig.cap="Phase", include=FALSE}
+knitr::kable(table, caption= "Example Table Caption", digits=2, col.names = )
+```
+
+
 
 #### Phase 2 Comparing Method Serial Dilutions (CDC vs NTP) with standard input of 300uL
 MOVE TO SUPPLEMENT
