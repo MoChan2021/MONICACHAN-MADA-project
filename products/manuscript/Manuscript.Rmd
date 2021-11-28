@@ -12,19 +12,22 @@ output:
     toc: false
     number_sections: true
 bibliography: ../references.bib
-csl: ../apa.csl
+csl: ../PLoS.csl
 ---
 
 # Summary/Abstract
 
-Applying MADA learned techniques to a RT-PCR data set to determine the effectiveness of sample enhancement strategies for environmental surface sampling of low bio-burden viruses.
+The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens. Although many viruses have a low infectious dose, they can be difficult to detect due to the low-bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improved outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices.
 
 # Introduction
 
 ## Background
 
-The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens [@Marcenac2021-sz]. Although many viruses have a low infectious dose, they can be difficult to detect due to the low bio-burden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control [@Paton2021-jc]. Culture-based methods can be labor and time intensive. The use and limitations of commercial "target capture" (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology's ability to capture SC2 from complex matrices.
+The global emergence of novel human coronavirus, SARS-CoV-2 (SC2) in 2019 became a global health concern. SC2 causes severe respiratory tract infections in humans with still unknown future complications. With the virus' high infection rate and rapid spreading capabilities via human-to-human transmission 
 
+The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens [@Tanner2021;@Marcenac2021-sz]. Although many viruses have a low infectious dose, they can be difficult to detect due to the low bio-burden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control [@Paton2021-jc]. Culture-based methods can be labor and time intensive. The use and limitations of commercial "target capture" (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology's ability to capture SC2 from complex matrices.
+
+The virus is capable of human-to-human transmission via inhalation of infected aerosols. Previous evaluations of viral fragment longevity have tested negative and indicate the possibility of no present virus or below assay limit of detection [@Parker2020].
 ### Questions/Hypotheses to be addressed
 
 There are several major aims of this:
@@ -44,7 +47,7 @@ In addition to the comparison of enhancement strategies the effects of the tool 
 
 ### Experiment setup and conditions
 
-Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR [@Wittwer2012-vt][@Shah2021-mb].
+Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; Nanotrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by rRT-PCR [@Wittwer2012-vt;@Shah2021-mb;@Barclay2020].
 
 ## Data aquisition
 
@@ -84,20 +87,20 @@ knitr::include_graphics("../../results/P1-SD-Plot.png")
 
 ### Phase 2
 
-```{r}
+```{r P2-SD, fig.cap="Serial Dilution Comparisons within Phase 2 data", echo=FALSE}
 knitr::include_graphics("../../results/P2-SD-Plot.png")
 ```
 
 #### Phase 2 Comparing A and B Tool Recovery
 
-```{r}
+```{r P2-Tool-AB, echo=FALSE, fig.cap="Phase 2 Comparison of A and B tool recovery"}
 knitr::include_graphics("../../results/ASK-P2P1-Tools.png")
 ```
 
 Tool A has an average Ct recovery higher than B. This makes sense as the surfaces A recovered from is 2 logs higher (-1) than that of B (-3). A log drop is \~3Ct values we can see from the graphic that it trends as predicted. Suggests that
 
 #### Phase 2 Comparing Method Serial Dilutions (CDC vs NTP) with standard input of 300uL
-
+MOVE TO SUPPLEMENT
 ```{r}
 knitr::include_graphics("../../results/ASK-P2P2-Methods.png")
 ```
@@ -106,37 +109,49 @@ Serial dilution data between CDC and NTP. Noting that all SD are in the confirme
 
 #### Phase 2 Comparing Methods with standard input of 300uL
 
-```{r}
+```{r P2Tools-Method, fig.cap="P2 Direct Comparisons of Recovery by Methods used", echo=FALSE}
 knitr::include_graphics("../../results/ASK-P2P3-Methods0300.png")
 ```
 
+### Phase 2
+
+Data was limited to Phase 2 data from this point on wards to limit variability in the surface recovery 
+
 #### Phase 2 Method extraction comparisons with all inputs and tools
 
-```{r}
-knitr::include_graphics("../../results/ASK-P2P4-MethodsALL.png")
-```
+
 
 #### Phase 2 Nanoparticles only - Compare detectors with dilution and input in Serial Dilutions
 
-```{r}
-knitr::include_graphics("../../results/ASK-P2P5-NTP-SD.png")
-```
+
 
 #### Phase 2 Nanoparticles only - All tools at 300 and 1000ul input levels
 
-```{r}
+```{r echo=FALSE}
 knitr::include_graphics("../../results/ASK-P2P6-NTP.png")
 ```
 
 ### Data Analysis
 
 ### Data Modeling
+```{r echo=FALSE}
+knitr::include_graphics("../../results/P2-RF-BestFit.png")
+```
+
+```{r ImportanceFactor, fig.cap="Bootstrapped Importance Factor excluding Tools ", echo=FALSE}
+knitr::include_graphics("../../results/P2-RF-BestFit-minus1.png")
+```
+
+```{r minusDecisionTree, fig.cap="Bootstrapped Decision Tree of Limited Factors.", echo=FALSE}
+knitr::include_graphics("../../results/P2-DecisionTree-minus1.png")
+```
+
 
 ## Exploratory analysis
 
 Table \@ref(tab:summarytable) shows a table summarizing the data.
 
-Figure \@ref(fig:resultfigure) shows a scatterplot figure produced by one of the R scripts.
+Figure \@ref(fig:minusDecisionTree) shows a bootstrapped decision tree figure.
 
 ```{r resultfigure, eval=FALSE, fig.cap='Analysis figure.', include=FALSE}
 knitr::include_graphics("../../results/resultfigure.png")
@@ -153,11 +168,14 @@ Example table \@ref(tab:resulttable) shows a table summarizing a linear model fi
 Took
 
 ## Strengths and Limitations
-
+RT-PCR does not distinguish between infectious and non-infectious virus. Additional work will need to be completed to better compare the recovery and estimate the true risk of SC2 in the environment.
 Need more replicates, but this is a time consuming processes just to get the data.
 
 Additional materials need to be considered [@Jansson2020-cg].
-
+Previous studies have demonstrated capture techniques can overcome limitations of conventional studies, and if applied to environmental samples can yield better data to enlighten the field [@Gasc2018].
 ## Conclusions
+The use of nanoparticles does result in the recovery of Ct values in the assay.
+with the results of the analysis of data there is no significant difference between the automated extraction method and the nanoparticles.
+Using some ML modeling we can see that there are some recorded variables that affect the Ct values- Dilution of the sample and Input.
 
 # References

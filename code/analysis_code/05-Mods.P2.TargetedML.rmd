@@ -35,7 +35,7 @@ Compare only dilutions that were -1.
 ```{r}
 P2.minus1<-
   P2%>%
-  filter(Tool!="B")%>% #remove B because this is actually a -3 dilution. Looking specifically at -1, keep SD range. 
+  filter(Tool!="B")%>% #remove B because this is actually a -3 dilution. Looking specifically at -1, keep SD range.
   mutate(
 # if greater than ct 38, this is a negative detection, thus less 38 is a positive in detection
     Ct.Cat = ifelse(Ct >=38,"No","Yes"), 
@@ -45,7 +45,7 @@ P2.minus1<-
     Ct.Cat=factor(Ct.Cat)
     )%>%
 #Remove/adjust so there are no character based factors
-    select(PCR, RH,TEMP, Method, Tool, Input, Detector, Ct, Ct.Cat,Dilution)%>%
+    select(RH,TEMP, Method, Tool, Input, Detector, Ct, Ct.Cat,Dilution)%>%
   na.omit()
 
 summary(P2.minus1)  
@@ -64,17 +64,22 @@ set.seed(123)
   
 ```{r}
 # Put 3/4 of the data into the training set; this leaves 1/4 of the data to be used to test 
-data_split <- initial_split(P2.minus1, prop = 3/4)
+data_split2 <- initial_split(P2.minus1, prop = 3/4)
 
 ## Create data frames for the two sets:
-train_data <- training(data_split)
-test_data  <- testing(data_split)
+train_data2 <- training(data_split2)
+test_data2  <- testing(data_split2)
 ```
 
 ```{r}
 #View the train and test data
-glimpse(train_data)
-glimpse(test_data)
+glimpse(train_data2)
+glimpse(test_data2)
+
+table(train_data2$Method)%>%
+  prop.table()
+table(test_data2$Method)%>%
+  prop.table()
 ```
 
 2. Creating Models
@@ -95,52 +100,43 @@ lm_glm   <- glm(Ct ~ ., data = P2.minus1,
 #########
 #<atempt to use later>
 # meta engine (aggregator) method=<method name>; see parsnips
-#lm_caret <- train(Ct ~ ., data = P2.Plus.Cat, 
-#                 method = "glm")
+lm_caret <- train(Ct ~ Method + Dilution + Input, data = P2.minus1, 
+                 method = "glm")
 ```
 
 2.4. Resampling - CV
 ```{r }
-# create CV object from training data
-cv_data <- rsample::vfold_cv(train_data, v = 5, repeats = 5, strata = 'Ct')
-
-print(cv_data)
-
-############## below are similar functions but need to try
-
-#apply CV in ML algorithm to process the ML model to each resample
-vfold_cv(P2.minus1, v=5)
-
-#bootstrapping- random sample of data with replacment
-bootstraps(P2.minus1, v=5)
+# create bootstrap resample object from training data
+cv_data_boots <- bootstraps(train_data2, v=5)
+print(cv_data_boots)
 ```
 Preprocessing
 Using parsnips to create a recipe for fitting the model
 No standardization
 adding dummy variables are added
 ```{r}
-fit_recipe <- 
-# set a recipe
-  recipe(Ct ~., data = P2.minus1) %>%
+fit_recipe2 <- 
+# set a recipe specific to the Dilution and Input
+  recipe(Ct ~Dilution+Input+Method, data = P2.minus1) %>%
 # code all categorical variables as dummy variables
   step_dummy(all_nominal()) 
 
-print(fit_recipe)
+print(fit_recipe2)
 ```
 Null Model
 Ct is a continuions outcome of numbers-- need to use RMSE as performance metric.
 ```{r}
-RMSE_null_train <- sqrt(sum( (train_data$Ct - mean(train_data$Ct))^2 )/nrow(train_data))
+RMSE_null_train2 <- sqrt(sum( (train_data2$Ct - mean(train_data2$Ct))^2 )/nrow(train_data2))
 
-RMSE_null_test <- sqrt(sum( (test_data$Ct - mean(test_data$Ct))^2 )/nrow(test_data))
+RMSE_null_test2 <- sqrt(sum( (test_data2$Ct - mean(test_data2$Ct))^2 )/nrow(test_data2))
 
-print(RMSE_null_train)
+print(RMSE_null_train2)
 
-#predict(lm_lm, train_data=Ct)
+predict(lm_glm, train_data=Ct)
 ```
 
 ```{r}
-rf_model <- rand_forest() %>%
+rf_model2 <- rand_forest() %>%
   set_args(mtry = tune(),     
     trees = tune(),
     min_n = tune()
@@ -155,46 +151,46 @@ rf_model <- rand_forest() %>%
 
 ```{r}
 #workflow
-rf_wf <- workflow() %>%
-  add_model(rf_model) %>% 
-  add_recipe(fit_recipe)
+rf_wf2 <- workflow() %>%
+  add_model(rf_model2) %>% 
+  add_recipe(fit_recipe2)
 ```
-
+Try bootstrapping in CV workflow
 ```{r}
 #tuning grid
-rf_grid  <- expand.grid(mtry = c(3, 4, 5, 6), min_n = c(40,50,60), trees = c(500,1000)  )
+rf_grid2  <- expand.grid(mtry = c(3, 4, 5, 6), min_n = c(40,50,60), trees = c(500,1000)  )
 
 # tune the model, optimizing RMSE
-rf_tune_res <- rf_wf %>%
+rf_tune_res2 <- rf_wf2 %>%
   tune_grid(
-            resamples = cv_data, #CV object
-            grid = rf_grid, # grid of values to try
+            resamples = cv_data_boots, #CV object
+            grid = rf_grid2, # grid of values to try
             metrics = metric_set(rmse) 
   )
 ```
 
 ```{r}
 #see a plot of performance for different tuning parameters
-rf_tune_res %>% autoplot()
+rf_tune_res2 %>% autoplot()
 ```
 ```{r}
 # get the tuned model that performs best 
-best_rf <- rf_tune_res %>%  select_best(metric = "rmse")
+best_rf2 <- rf_tune_res2 %>%  select_best(metric = "rmse")
 
 # finalize workflow with best model
-best_rf_wf <- rf_wf %>% finalize_workflow(best_rf)
+best_rf_wf2 <- rf_wf2 %>% finalize_workflow(best_rf2)
 
 # fitting best performing model
-best_rf_fit <- best_rf_wf %>% 
-  fit(data = train_data)
-rf_pred <- predict(best_rf_fit, train_data)
+best_rf_fit2 <- best_rf_wf2 %>% 
+  fit(data = train_data2)
+rf_pred2 <- predict(best_rf_fit2, train_data2)
 ```
 
 ```{r}
 #pull out the fit object
-x <- best_rf_fit$fit$fit$fit
+x2 <- best_rf_fit2$fit$fit$fit
 #plot variable importance
-P2RFBestFitminus1<-vip::vip(x, num_features = 20)
+P2RFBestFitminus1<-vip::vip(x2, num_features = 10, geom="point", aesthetics = list(color = "red", shape = 17, size = 4))
 print(P2RFBestFitminus1)
 ```
 Interesting so Dilution is obviously more important followed by Input. It's more surprizing that the Method is one of the least important in this comparison. Infact the temperature and relative humidity are more impractically thatn the method.
@@ -206,17 +202,17 @@ ggsave(filename = figure_file, plot=P2RFBestFitminus1)
 
 ```{r}
 #predicted versus observed
-plot(rf_pred$.pred,train_data$Ct, xlim =c(10,50), ylim=c(10,50))
+plot(rf_pred2$.pred,train_data2$Ct)
 abline(a=0,b=1, col = 'red') #45 degree line, along which the results should fall
 ```
 ```{r}
 #residuals
-plot(rf_pred$.pred-train_data$Ct)
+plot(rf_pred2$.pred-train_data2$Ct)
 abline(a=0,b=0, col = 'red') #straight line, along which the results should fall
 ```
 ```{r}
-rf_perfomance <- rf_tune_res %>% show_best(n = 5)
-print(rf_perfomance)
+rf_perfomance2 <- rf_tune_res2 %>% show_best(n = 5)
+print(rf_perfomance2)
 ```
 
 # Try to see if Best Tree can show us something
@@ -224,7 +220,7 @@ print(rf_perfomance)
 
 Tree model
 ```{r}
-tree_model <-  decision_tree() %>% 
+tree_model2 <-  decision_tree() %>% 
   set_args( cost_complexity = tune(), tree_depth = tune(), min_n = tune()) %>% 
   set_engine("rpart") %>% 
   set_mode("regression")      
@@ -232,39 +228,45 @@ tree_model <-  decision_tree() %>%
 Workflow
 ```{r}
 #set workflow
-tree_wf <- workflow() %>%
-  add_model(tree_model) %>%
-  add_recipe(fit_recipe)
+tree_wf2 <- workflow() %>%
+  add_model(tree_model2) %>%
+  add_recipe(fit_recipe2)
 ```
 Tree Model
 ```{r}
 #tuning grid
-tree_grid <- dials::grid_regular(cost_complexity(), tree_depth(), min_n(), levels = 5)
+tree_grid2 <- dials::grid_regular(cost_complexity(), tree_depth(), min_n(), levels = 5)
 #tune the model
-tree_tune_res <- tree_wf %>% 
+tree_tune_res2 <- tree_wf2 %>% 
   tune::tune_grid(
-    resamples = cv_data,
-    grid = tree_grid,
+    resamples = cv_data_boots,
+    grid = tree_grid2,
     metrics = yardstick::metric_set(rmse) 
   )
 ```
 
 ```{r}
 #see a plot of performance for different tuning parameters
-tree_tune_res %>% autoplot()
+tree_tune_res2 %>% autoplot()
 ```
 ```{r}
 # get the tuned model that performs best 
-best_tree <- tree_tune_res %>%  select_best(metric = "rmse")
+best_tree2 <- tree_tune_res2 %>%  select_best(metric = "rmse")
 # finalize workflow with best model
-best_tree_wf <- tree_wf %>% finalize_workflow(best_tree)
+best_tree_wf2 <- tree_wf2 %>% finalize_workflow(best_tree2)
 # fitting best performing model
-best_tree_fit <- best_tree_wf %>% 
-                 fit(data = train_data)
+best_tree_fit2 <- best_tree_wf2 %>% 
+                 fit(data = train_data2)
 #predicting outcomes for final model
-tree_pred <- predict(best_tree_fit, train_data)
+tree_pred2 <- predict(best_tree_fit2, train_data2)
 ```
 
 ```{r}
-rpart.plot(extract_fit_parsnip(best_tree_fit)$fit)
+minusTree<-
+  rpart.plot(extract_fit_parsnip(best_tree_fit2)$fit,type = 5, tweak = 1.2)
+
+print(minusTree)
 ```
+Each node shows: predicted values, and percentage of observations in node.
+So if the dilution is still the lead in the effects of the Ct. - Makes sense as that's the spiking/manipulating level 
+If the dilution is greater than -1.5, effects of the input factor strongly in the Ct recovery, with a little input from the method if the input is less than 650uL 

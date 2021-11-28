@@ -42,7 +42,7 @@ P2.Plus.Cat<-
     Ct.Cat=factor(Ct.Cat)
     )%>%
 #Remove/adjust so there are no character based factors
-    select(PCR, RH,TEMP, Method, Tool, Input, Detector, Ct, Ct.Cat)%>%
+    select(RH,TEMP, Method, Tool, Input, Detector, Ct, Ct.Cat)%>%
   na.omit()
 
 summary(P2.Plus.Cat)  
@@ -108,8 +108,6 @@ print(cv_data)
 #apply CV in ML algorithm to process the ML model to each resample
 vfold_cv(P2.Plus.Cat, v=5)
 
-#bootstrapping- random sample of data with replacment
-bootstraps(P2.Plus.Cat, v=5)
 ```
 Preprocessing
 Using parsnims to create a recipe for fitting the model
@@ -125,7 +123,7 @@ fit_recipe <-
 print(fit_recipe)
 ```
 Null Model
-Ct is a continuions outcome of numbers-- need to use RMSE as performance metric.
+Ct is a continuations outcome of numbers-- need to use RMSE as performance metric.
 ```{r}
 RMSE_null_train <- sqrt(sum( (train_data$Ct - mean(train_data$Ct))^2 )/nrow(train_data))
 
@@ -156,6 +154,7 @@ rf_wf <- workflow() %>%
   add_model(rf_model) %>% 
   add_recipe(fit_recipe)
 ```
+Model tuning with a grid.
 
 ```{r}
 #tuning grid
@@ -169,11 +168,13 @@ rf_tune_res <- rf_wf %>%
             metrics = metric_set(rmse) 
   )
 ```
-
+Plot the performance of the grid tune results.
 ```{r}
 #see a plot of performance for different tuning parameters
 rf_tune_res %>% autoplot()
 ```
+
+
 ```{r}
 # get the tuned model that performs best 
 best_rf <- rf_tune_res %>%  select_best(metric = "rmse")
@@ -186,15 +187,18 @@ best_rf_fit <- best_rf_wf %>%
   fit(data = train_data)
 rf_pred <- predict(best_rf_fit, train_data)
 ```
-
+Use vip to learn about variable importance in the modeling
 ```{r}
 #pull out the fit object
 x <- best_rf_fit$fit$fit$fit
 #plot variable importance
-P2RFBestFit<-vip::vip(x, num_features = 20)
+P2RFBestFit<-vip::vip(x, geom="point",aesthetics = list(color = "blue", shape = 17, size = 4))
+
 print(P2RFBestFit)
 ```
-Meaning that the point of Tool B is the most important/predictive variable for Ct outcome
+Meaning that the point of Tool B is the most important/predictive variable for Ct outcome, makes sense as the top 3 are tool related and all have different "concentrations".
+Also not pressurizing that Dilution and Input are important.
+Method has virtually 0 importance in the Ct value during the modeling. 
 ```{r warning=FALSE}
 #save figure
 figure_file = here("results","P2-RF-BestFit.png")
@@ -203,7 +207,7 @@ ggsave(filename = figure_file, plot=P2RFBestFit)
 
 ```{r}
 #predicted versus observed
-plot(rf_pred$.pred,train_data$Ct, xlim =c(10,50), ylim=c(10,50))
+plot(rf_pred$.pred,train_data$Ct )
 abline(a=0,b=1, col = 'red') #45 degree line, along which the results should fall
 ```
 ```{r}
@@ -215,3 +219,4 @@ abline(a=0,b=0, col = 'red') #straight line, along which the results should fall
 rf_perfomance <- rf_tune_res %>% show_best(n = 5)
 print(rf_perfomance)
 ```
+
