@@ -205,8 +205,7 @@ pre code {
 <p>Culture-based methods can be labor and time intensive. An accepted standard for testing humans for COVID-19 is the SC2 real-time RT-PCR reverse transcription–polymerase chain reaction (RT-PCR)<span class="citation">[1]</span>. CT quantification has been shown to have potential for assisting in decision-making in the management of COVID-19 patients<span class="citation">[1]</span>.</p>
 <p>As the virus is capable of human-to-human transmission via inhalation of infected aerosols, the existence of environmental reservoirs is likely. Environmental reservoirs are a known indirect transmission route for viral pathogens <span class="citation">[2,3]</span>.The ability to detect it in an environment is critical to identifying hidden reservoirs which can inform infection control <span class="citation">[4]</span>. Many viruses have a low infectious dose, they can be difficult to detect due to the low bio-burden in the environment.</p>
 <p>Previous evaluations of viral fragment longevity have tested negative and indicate the possibility of no present virus or below assay limit of detection <span class="citation">[5]</span>. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices. The TC method proposed to be tested is one based on magnetized hydro-gel particles treated with affinity dyes that can be customized to select for and bind with a multitude of analytes. A retail kit of these particles, NanoTrap Particles, are commercially avalible and advertised as being specially capable of “capturing” the SC2 virus from various sample types such as clinical isolates to waste water better than processing a sample without the use of the particle.</p>
-<p>Using RT-PCR we will establish that the TC method, NanoTrap Particles, perform. Then the results will be compared with a standardized automated preparation method. By measuring the Ct values of the resulting methods we can determine the sensitivity of these extraction methods to capture addition or retain the genomic copies from a sample. The data set will then be broken down and analyzed specifically with surface sampling capture to see if it is possible to recover from the environment with the use of a specialized sampling tool for molecular work.</p>
-<p>CT quantification combined with patient symptom data has shown promise when implemented with machine learning, although many studies are focused on patient information or are proof of concept <span class="citation">[6–8]</span>. Additional exploration of the data with some machine learning techniques for any significant importance to Ct value recovery will be performed.
+<p>Using RT-PCR we will establish that the TC method, NanoTrap Particles, perform. Then the results will be compared with a standardized automated preparation method. By measuring the Ct values of the resulting methods we can determine the sensitivity of these extraction methods to capture addition or retain the genomic copies from a sample. The data set will then be broken down and analyzed specifically with surface sampling capture to see if it is possible to recover from the environment with the use of a specialized sampling tool for molecular work.
 <br></p>
 </div>
 <div id="material-and-methods" class="section level1" number="3">
@@ -215,7 +214,7 @@ pre code {
 <h2><span class="header-section-number">3.1</span> Data collection</h2>
 <div id="setup-and-conditions" class="section level3" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Setup and conditions</h3>
-<p>Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; NanoTrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by RT-PCR. <span class="citation">[9–11]</span>.
+<p>Using established standard methods for environmental sampling with a self-contained polyurethane swab from stainless steel surface, a TC approach (NTP; NanoTrap® Magnetic Virus Particles, Ceres Nanosciences) was compared to an automated extraction method (MX48; Maxwell® RSC Viral Total Nucleic Acid Purification Kit, Promega) for recovery of heat-inactivated SC2 from the polyurethane swab as detected by RT-PCR. <span class="citation">[6–8]</span>.
 Real time RT-PCR was conducted per CDC 2019-nCoV Real-Time RT-PCR Diagnostic Panel protocol to detect the presence of N1 and N2 sequences designed for the specific detection of 2019-nCoV.Reports were QCed and exported from machines electronically.</p>
 </div>
 <div id="data-aquisition-and-compillation" class="section level3" number="3.1.2">
@@ -331,10 +330,10 @@ Tools A and B are different dilution levels (1:10 and 1:1000, respectively) and 
 <div id="limitations" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Limitations</h2>
 <p>The use of dilution in this study is limiting as we can only estimate the genomic copies that are being picked up by the real time RT-PCR assay. Additional studies or re-count of the samples by use of digital droplet PCR to get an estimate count of genomic copies would yield better association and capture comparison data.</p>
-<p>RT-PCR does not distinguish between infectious and non-infectious virus. Additional work will need to be completed to better compare the recovery and estimate the true risk of SC2 in the environment.</p>
-<p>Need more replicates, but this is a time consuming processes just to get the data.</p>
-<p>Additional materials need to be considered <span class="citation">[12]</span>.
-Previous studies have demonstrated capture techniques can overcome limitations of conventional studies, and if applied to environmental samples can yield better data to enlighten the field <span class="citation">[13]</span>.</p>
+<p>RT-PCR does not distinguish between infectious and non-infectious virus. Additional work will need to be completed to better compare the recovery and estimate the true risk of SC2 in the environment. Ct quantification combined with patient symptom data has shown promise when implemented with machine learning <span class="citation">[9–11]</span>. A number of studies are focused on patient information or are proof of concept <span class="citation">[9–11]</span>. Additional exploration of environmental recovery data with similar machine learning techniques could enhance the ability to predict or back calculate true source values in the environment.</p>
+<p>The data in general need more replicates, but this is a time consuming processes just to get the data. This could be remedied by additional dummy variables, but additional replicates would also help with the dummy generation.</p>
+<p>Additional factors such as materials and sample area need to be considered <span class="citation">[12]</span>. Previous work with bacteria have shown that there are affects on surface area and surface tool on total recovery <span class="citation">[2,3]</span>.</p>
+<p>Previous studies have demonstrated capture techniques can overcome limitations of conventional studies, and if applied to environmental samples can yield better data to enlighten the field <span class="citation">[13]</span>.</p>
 </div>
 <div id="conclusions" class="section level2" number="5.2">
 <h2><span class="header-section-number">5.2</span> Conclusions</h2>
@@ -365,23 +364,23 @@ Using some ML modeling we can see that there are some recorded variables that af
 <div id="ref-Parker2020" class="csl-entry">
 <div class="csl-left-margin">5. </div><div class="csl-right-inline">Parker CW, Singh N, Tighe S, Blachowicz A, Wood JM, Seuylemezian A, et al. <span class="nocase">End-to-End</span> protocol for the detection of <span>SARS-CoV-2</span> from built environments. mSystems. 2020;5. </div>
 </div>
-<div id="ref-Cai2020" class="csl-entry">
-<div class="csl-left-margin">6. </div><div class="csl-right-inline">Cai W, Liu T, Xue X, Luo G, Wang X, Shen Y, et al. <span>CT</span> quantification and machine-learning models for assessment of disease severity and prognosis of <span>COVID-19</span> patients. Acad Radiol. 2020;27: 1665–1678. </div>
-</div>
-<div id="ref-Langer2020" class="csl-entry">
-<div class="csl-left-margin">7. </div><div class="csl-right-inline">Langer T, Favarato M, Giudici R, Bassi G, Garberi R, Villa F, et al. Development of machine learning models to predict <span>RT-PCR</span> results for severe acute respiratory syndrome coronavirus 2 (<span>SARS-CoV-2</span>) in patients with influenza-like symptoms using only basic clinical data. Scand J Trauma Resusc Emerg Med. 2020;28: 113. </div>
-</div>
-<div id="ref-Gangloff2021" class="csl-entry">
-<div class="csl-left-margin">8. </div><div class="csl-right-inline">Gangloff C, Rafi S, Bouzillé G, Soulat L, Cuggia M. Machine learning is the key to diagnose <span>COVID-19</span>: A proof-of-concept study. Sci Rep. 2021;11: 7166. </div>
-</div>
 <div id="ref-Wittwer2012-vt" class="csl-entry">
-<div class="csl-left-margin">9. </div><div class="csl-right-inline">Wittwer C, Hahn M, Kaul K. Rapid cycle <span>Real-Time</span> <span>PCR</span> — methods and applications: quantification. Springer Berlin Heidelberg; 2012. </div>
+<div class="csl-left-margin">6. </div><div class="csl-right-inline">Wittwer C, Hahn M, Kaul K. Rapid cycle <span>Real-Time</span> <span>PCR</span> — methods and applications: quantification. Springer Berlin Heidelberg; 2012. </div>
 </div>
 <div id="ref-Shah2021-mb" class="csl-entry">
-<div class="csl-left-margin">10. </div><div class="csl-right-inline">Shah SR, Kane SR, Elsheikh M, Alfaro TM. Development of a rapid viability <span>RT-PCR</span> (<span>RV-RT-PCR</span>) method to detect infectious <span>SARS-CoV-2</span> from swabs. J Virol Methods. 2021;297: 114251. </div>
+<div class="csl-left-margin">7. </div><div class="csl-right-inline">Shah SR, Kane SR, Elsheikh M, Alfaro TM. Development of a rapid viability <span>RT-PCR</span> (<span>RV-RT-PCR</span>) method to detect infectious <span>SARS-CoV-2</span> from swabs. J Virol Methods. 2021;297: 114251. </div>
 </div>
 <div id="ref-Barclay2020" class="csl-entry">
-<div class="csl-left-margin">11. </div><div class="csl-right-inline">Barclay R, Akhrymuk I, Patnaik A, Callahan V, Lehman C, Andersen P, et al. Nanotrap<span><span></span></span> particles improve detection of SARS-CoV-2 for pooled sample methods, extraction-free saliva methods, and extraction-free transport medium methods. bioRxiv. 2020. doi:<a href="https://doi.org/10.1101/2020.06.25.172510">10.1101/2020.06.25.172510</a></div>
+<div class="csl-left-margin">8. </div><div class="csl-right-inline">Barclay R, Akhrymuk I, Patnaik A, Callahan V, Lehman C, Andersen P, et al. Nanotrap<span><span></span></span> particles improve detection of SARS-CoV-2 for pooled sample methods, extraction-free saliva methods, and extraction-free transport medium methods. bioRxiv. 2020. doi:<a href="https://doi.org/10.1101/2020.06.25.172510">10.1101/2020.06.25.172510</a></div>
+</div>
+<div id="ref-Cai2020" class="csl-entry">
+<div class="csl-left-margin">9. </div><div class="csl-right-inline">Cai W, Liu T, Xue X, Luo G, Wang X, Shen Y, et al. <span>CT</span> quantification and machine-learning models for assessment of disease severity and prognosis of <span>COVID-19</span> patients. Acad Radiol. 2020;27: 1665–1678. </div>
+</div>
+<div id="ref-Langer2020" class="csl-entry">
+<div class="csl-left-margin">10. </div><div class="csl-right-inline">Langer T, Favarato M, Giudici R, Bassi G, Garberi R, Villa F, et al. Development of machine learning models to predict <span>RT-PCR</span> results for severe acute respiratory syndrome coronavirus 2 (<span>SARS-CoV-2</span>) in patients with influenza-like symptoms using only basic clinical data. Scand J Trauma Resusc Emerg Med. 2020;28: 113. </div>
+</div>
+<div id="ref-Gangloff2021" class="csl-entry">
+<div class="csl-left-margin">11. </div><div class="csl-right-inline">Gangloff C, Rafi S, Bouzillé G, Soulat L, Cuggia M. Machine learning is the key to diagnose <span>COVID-19</span>: A proof-of-concept study. Sci Rep. 2021;11: 7166. </div>
 </div>
 <div id="ref-Jansson2020-cg" class="csl-entry">
 <div class="csl-left-margin">12. </div><div class="csl-right-inline">Jansson L, Akel Y, Eriksson R, Lavander M, Hedman J. Impact of swab material on microbial surface sampling. J Microbiol Methods. 2020;176: 106006. </div>

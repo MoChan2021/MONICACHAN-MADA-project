@@ -17,8 +17,7 @@ csl: ../PLoS.csl
 # Summary/Abstract
 
 The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens. Although many viruses have a low infectious dose, they can be difficult to detect due to the low-bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improved outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices. That data gathered supports that the using TC technology, nanoparticles, does extract from a sample, yet shows no difference between the currently used automated extraction method. Comparisons between the details of method used were also explored. Sample factors such as input and dilution were found to impact sample recovery and environmental data showed very light effects-- as shown by using machine learning methods. 
-
-<br><br>
+<br>
 
 # Introduction
 
@@ -31,8 +30,6 @@ As the virus is capable of human-to-human transmission via inhalation of infecte
 Previous evaluations of viral fragment longevity have tested negative and indicate the possibility of no present virus or below assay limit of detection [@Parker2020]. The use and limitations of commercial "target capture" (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology's ability to capture SC2 from complex matrices. The TC method proposed to be tested is one based on magnetized hydro-gel particles treated with affinity dyes that can be customized to select for and bind with a multitude of analytes. A retail kit of these particles, NanoTrap Particles, are commercially avalible and advertised as being specially capable of "capturing" the SC2 virus from various sample types such as clinical isolates to waste water better than processing a sample without the use of the particle.
 
 Using RT-PCR we will establish that the TC method, NanoTrap Particles, perform. Then the results will be compared with a standardized automated preparation method. By measuring the Ct values of the  resulting methods we can determine the sensitivity of these extraction methods to capture addition or retain the genomic copies from a sample. The data set will then be broken down and analyzed specifically with surface sampling capture to see if it is possible to recover from the environment with the use of a specialized sampling tool for molecular work.
-
-CT quantification combined with patient symptom data has shown promise when implemented with machine learning, although many studies are focused on patient information or are proof of concept [@Cai2020;@Langer2020;@Gangloff2021]. Additional exploration of the data with some machine learning techniques for any significant importance to Ct value recovery will be performed.
 <br>
 
 # Material and methods
@@ -143,6 +140,7 @@ knitr::include_graphics("../../results/P2-DecisionTree-minus1.png")
 ```
 
 Ran the Random Forest parameters as a best tree to create a decision tree. We can see that Dilution can be exclusively what determines recovery values when dilutions are less than -1.5. If dilutions are above -1.5, the input of sample and method may influence the recovered Ct values.
+<br>
 
 # Discussion
 
@@ -153,16 +151,16 @@ In a direct comparison between methods, NTP is more variable than CDC. This can 
 Dilution and input play an important part in Ct recovery (\@ref(fig:ImportanceFactor) and \@ref(fig:ImportanceFactor2)). 
 Tools A and B are different dilution levels (1:10 and 1:1000, respectively) and the drop between Ct values is consistent with expected log loss equivalent values (\@ref(fig:P2-Tool-AB)). In \@ref(fig:P2-Tool-AB) we can see that as the input increases the general sample has a smaller recovery Ct value. Yet, with the data gathered only after the input is greater than 6800µL does the value surpass the recovery range obtained at the 1000µl input volume. This suggests that the NTP method is able to utilize and capture at least what is available in the sample, and perhaps more.
 
-
 ## Limitations
 
 The use of dilution in this study is limiting as we can only estimate the genomic copies that are being picked up by the real time RT-PCR assay. Additional studies or re-count of the samples by use of digital droplet PCR to get an estimate count of genomic copies would yield better association and capture comparison data.
 
-RT-PCR does not distinguish between infectious and non-infectious virus. Additional work will need to be completed to better compare the recovery and estimate the true risk of SC2 in the environment.
+RT-PCR does not distinguish between infectious and non-infectious virus. Additional work will need to be completed to better compare the recovery and estimate the true risk of SC2 in the environment. Ct quantification combined with patient symptom data has shown promise when implemented with machine learning [@Cai2020;@Langer2020;@Gangloff2021]. A number of studies are focused on patient information or are proof of concept [@Cai2020;@Langer2020;@Gangloff2021]. Additional exploration of environmental recovery data with similar machine learning techniques could enhance the ability to predict or back calculate true source values in the environment.
 
-Need more replicates, but this is a time consuming processes just to get the data.
+The data in general need more replicates, but this is a time consuming processes just to get the data. This could be remedied by additional dummy variables, but additional replicates would also help with the dummy generation.
 
-Additional materials need to be considered [@Jansson2020-cg].
+Additional factors such as materials and sample area need to be considered [@Jansson2020-cg]. Previous work with bacteria have shown that there are affects on surface area and surface tool on total recovery [@Tanner2021;@Marcenac2021-sz]. 
+
 Previous studies have demonstrated capture techniques can overcome limitations of conventional studies, and if applied to environmental samples can yield better data to enlighten the field [@Gasc2018].
 
 ## Conclusions
@@ -170,6 +168,7 @@ Previous studies have demonstrated capture techniques can overcome limitations o
 The use of NTP does result in the recovery of Ct values in the assay.
 with the results of the analysis of data there is no significant difference between the automated extraction method and the NTP
 Using some ML modeling we can see that there are some recorded variables that affect the Ct values- Dilution of the sample and Input.
+<br>
 
 # Data accessibility
 
