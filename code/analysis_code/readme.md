@@ -16,16 +16,6 @@ Required packages in R to process and reproduce data.
 * `rpart.plot`
 * `glmnet`
 
-### Processing raw data
-
-1. Raw data has been compiled and deposited in `raw_data` folder.
-2. code/`processing_code` folder contains rmd file processing and cleaning compiled data set `ProcessingScript.Rmd`
-   - Data has been cleaned, split, and saved as rds files in `data`/`processed-data` for use in analysis.  
-     - `ALL.Data-20211029.rds` Compilation of all reports
-     - `P1-20211029.rds` Direct Spike Data
-     - `P2-20211029.rds` Surface Recovery Data
-    
-
 ### Analysis
 
 1. Analysis code of processed data has been compiled in `analysis_code` folder.

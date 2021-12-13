@@ -1,5 +1,5 @@
 ---
-title: "MADA Data Analysis Project"
+title: "Evaluation of "
 subtitle: ""
 author: Monica Chan
 date: "`r Sys.Date()`"
@@ -14,16 +14,24 @@ output:
 bibliography: ../references.bib
 csl: ../PLoS.csl
 ---
-
 # Summary/Abstract
 
-The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens. Although many viruses have a low infectious dose, they can be difficult to detect due to the low-bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improved outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices.
+The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens. Although many viruses have a low infectious dose, they can be difficult to detect due to the low-bioburden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control. Culture-based methods can be labor and time intensive. The use and limitations of commercial “target capture” (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improved outbreak response through rapid pathogen detection by evaluating a TC technology’s ability to capture SC2 from complex matrices. That data gathered supports that the using TC technology, nanoparticles, does extract from a sample, yet shows no difference between the currently used automated extraction method. Comparisons between the details of method used were also explored. Sample factors such as input and dilution were found to impact sample recovery and environmental data showed very light effects-- as shown by using machine learning methods. 
+
+<br><br>
 
 # Introduction
 
 The global Coronavirus Disease 2019 (COVID-19) pandemic continues to persist due to the timing of an available vaccine, varying adherence to COVID-19 public health safety recommendations, and the emergence of SARS-CoV-2 (SC2) variants. Environmental reservoirs are a reported, indirect transmission route for viral pathogens [@Tanner2021;@Marcenac2021-sz]. Although many viruses have a low infectious dose, they can be difficult to detect due to the low bio-burden in the environment. The ability to detect viral pathogens is critical to identifying hidden reservoirs which can inform infection control [@Paton2021-jc]. Culture-based methods can be labor and time intensive. The use and limitations of commercial "target capture" (TC) technologies are varied compared to molecular approaches utilizing automated extraction. The objective of this study is improve outbreak response through rapid pathogen detection by evaluating a TC technology's ability to capture SC2 from complex matrices.
 
-The virus is capable of human-to-human transmission via inhalation of infected aerosols. Previous evaluations of viral fragment longevity have tested negative and indicate the possibility of no present virus or below assay limit of detection [@Parker2020].
+The virus is capable of human-to-human transmission via inhalation of infected aerosols. To limit the effect, patients with COVID-19 symptoms have been encouraged to test for a confirmed diagnosis one such test that has been the accepted standard is the SARS-coV-2 real-time RT-PCR reverse transcription–polymerase chain reaction (RT-PCR)[@Hanson2020]. However, like with many tests, RT-PCR are subject to error and can produce false negative results.
+
+This Previous evaluations of viral fragment longevity have tested negative and indicate the possibility of no present virus or below assay limit of detection [@Parker2020].
+
+CT quantification has been shown to have potential for assisting in decision-making in the management of COVID-19 patients[@Hanson2020]. CT quantification combined with patient symptom data has shown promise when implemented with machine learning, although many studies are focused on patient information or are proof of concept [@Cai2020;@Langer2020;@Gangloff2021].
+
+The promise of these evaluations may translate well into environmental sampling and surveillance allowing for preventive action in regards to reducing risk and containing outbreak.
+<br>
 
 # Material and methods
 
